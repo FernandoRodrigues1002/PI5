@@ -6,4 +6,4 @@ pip install -r requirements.txt
 
 python run.py
 
-## A aplicação estará disponível em http://127.0.0.1:5000 e se conectará ao mesmo banco de dados MySQ
+## A aplicação estará disponível em http://127.0.0.1:5000 e se conectará ao mesmo banco de dados MySQL
