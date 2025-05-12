@@ -1,0 +1,40 @@
+#overlay {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border: 2px solid #c00;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    font-family: sans-serif;
+}
+  
+#overlay button {
+    display: block;
+    margin: 12px auto 0;
+    padding: 6px 12px;
+    border: none;
+    background: #c00;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+  
+.popup-content {
+    text-align: center;
+}
+  
+.popup-content button {
+    margin-top: 8px;
+    padding: 4px 8px;
+    background-color: #c00;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+  
