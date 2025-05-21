@@ -1,12 +1,14 @@
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
-  <div>
-    <h1>Teste</h1>
-
-    <Link href="/pages/cadastro">cadastro </Link>
-    <Link href="/pages/login">login </Link>
-  </div>
+    <>
+      <Navbar />
+      <main style={{ padding: "2rem" }}>
+        <h1>Teste</h1>
+      </main>
+    </>
   );
 }
+
