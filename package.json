@@ -16,5 +16,8 @@
     "url": "https://github.com/FernandoRodrigues1002/PI5/issues"
   },
   "homepage": "https://github.com/FernandoRodrigues1002/PI5#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "leaflet": "^1.9.4"
+  }
 }
