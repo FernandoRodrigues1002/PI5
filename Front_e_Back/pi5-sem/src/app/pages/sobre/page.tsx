@@ -1,14 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import styles from "../styles/sobre.module.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import styles from "./sobre.module.css";
 
 export default function Sobre() {
   return (
     <>
-      <Navbar />
 
       <main className={styles.main}>
         <section className={styles.hero}>
@@ -64,8 +61,7 @@ export default function Sobre() {
           </p>
         </section>
       </main>
-
-      <Footer />
+      
     </>
   );
 }
