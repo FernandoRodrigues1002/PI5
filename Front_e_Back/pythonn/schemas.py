@@ -14,3 +14,4 @@ class UsuarioSchema(Schema):
     email = fields.Email(required=True)
     senha = fields.Str(required=True, validate=validate.Length(min=6))
     cpf = fields.Str(required=False, validate=validar_cpf)
+    premium = fields.Boolean(required=False, missing=False)

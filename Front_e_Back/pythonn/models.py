@@ -13,3 +13,4 @@ class Usuario(db.Model):
     email = db.Column(db.String(255), nullable=False)
     senha = db.Column(db.String(255), nullable=False)
     cpf = db.Column(db.String(255), nullable=True)
+    premium = db.Column(db.Boolean, nullable=False, default=False)
