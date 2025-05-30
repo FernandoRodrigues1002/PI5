@@ -1,36 +1,136 @@
 /* =========================== */
-/* HEADER - Animação e busca   */
+/* HEADER - H1 E DESCRIÇÃO */
 /* =========================== */
 
-.header {
-  position: relative;
-  width: 100%;
-  z-index: 1;
-}
-
-.headerContent {
+/* Container do header para ocupar tela inteira */
+.headerContainer {
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+
+}
+
+.tileHeader {
+  font-size: 5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1s ease;
+  color: #073564;
+}
+
+.descriptionHeader {
+  font-size: 1.8rem;
+  color: #4a5568;
+  text-align: center;
+  line-height: 1.6;
+  max-width: 900px;
+  margin: 0 auto;
+  opacity: 0.9;
+  font-weight: 400;
+  animation: fadeInUp 1s ease 0.2s both;
+  padding: 0 20px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .tileHeader {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .descriptionHeader {
+    font-size: 1.4rem;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tileHeader {
+    font-size: 2.5rem;
+  }
+  
+  .descriptionHeader {
+    font-size: 1.2rem;
+    padding: 0 10px;
+  }
+}
+
+/* =========================== */
+/* SEÇÃO 1 - MAPA E ANIMAÇÃO */
+/* =========================== */
+
+.mapAndAnimationWrapper {
+  display: flex;
+  width: 100%;
+  height: 700px;
+  overflow: hidden;
+}
+
+.mapSection {
+  flex: 3;
+  height: 100%;
+  position: relative;
+  border-top-left-radius: 50px;
+  overflow: hidden;
+}
+
+.mapBg {
+  position: absolute;
+  inset: 0;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  overflow: hidden;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
 }
 
 .animationBox {
+  flex: 1;
+  height: 100%;
+  padding: 20px;
+  background-color: var(--azul1);
   display: flex;
-  flex-direction: row;
-  gap: 20px;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #073564;
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-  width: fit-content;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .doctorAnimation {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 300px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .textInputColumn {
@@ -55,10 +155,14 @@
   width: 100%;
   padding: 10px 40px 10px 15px;
   border-radius: 30px;
-  border: 1px solid #ccc;
+  border: 1px solid white;
   font-size: 16px;
   outline: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pesquisa input::placeholder {
+  color: white;
 }
 
 .pesquisa button {
@@ -78,65 +182,15 @@
   height: 20px;
 }
 
-
 /* =========================== */
-/* MAPA E BUSCA POR LOCALIDADE */
-/* =========================== */
-
-.mapSection {
-  position: relative;
-  width: 100%;
-  height: 700px;
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
-  transform: translateY(-15%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.mapBg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
-  overflow: hidden;
-}
-
-.map {
-  width: 100%;
-  height: 100%;
-}
-
-.busca {
-  z-index: 1;
-  width: 400px;
-  height: 200px;
-  background-color: #4a64b8;
-  position: relative;
-  border-radius: 20px;
-}
-
-.titleBusca {
-  padding-top: 40px;
-  text-align: center;
-  color: #fff;
-  font-size: 24px;
-}
-
-
-/* =========================== */
-/* VACINE-SE!    */
+/* SEÇÃO 2 - VACINE-SE */
 /* =========================== */
 
 .news1 {
   width: 100%;
-  height: 600px;
-  background-color: #4a64b8;
+  height: auto;
   position: relative;
-  top: -105px;
+  padding-bottom: 40px;
 }
 
 .newTitle {
@@ -144,64 +198,97 @@
   justify-content: center;
   padding-top: 80px;
   margin-bottom: 40px;
-  color: #fff;
-  font-size: 52px;
+  color: #073564;
+  font-size: 48px;
+  text-align: center;
 }
 
 .newsContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: stretch;
+  align-items: flex-start;
   gap: 20px;
-  padding: 0 40px;
+  padding: 0 30px;
 }
 
-.newTextBlock {
+.newTextBlock,
+.animationWrapper {
   flex: 1;
-  max-width: 50%;
-  background-color: #073564;
-  border-radius: 20px;
-  padding: 20px;
+  max-width: 45%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .newText {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.textBox {
+  background-color: #5a6499;
+  border-radius: 16px;
+  padding: 16px;
   color: #fff;
   text-align: justify;
+  font-size: 1.2rem;
   line-height: 1.6;
-  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .animationWrapper {
-  flex: 1;
-  max-width: 50%;
-  padding: 20px;
+  height: 300px;
+  padding: 10px;
   border-radius: 20px;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
 /* =========================== */
-/* BENEFÍCIOS DA VACINAÇÃO     */
+/* SEÇÃO 3 - CALENDÁRIO */
 /* =========================== */
 
-.benefitsSection {
-  background-color: #073564;
-  padding: 80px 20px;
+.calendarSection {
+  padding: 10px 0 70px;
   position: relative;
-  top: -80px;
+  text-align: center;
 }
 
 .sectionTitle {
-  color: white;
+  color: black;
   font-size: 36px;
-  text-align: center;
   margin-bottom: 40px;
+}
+
+.sectionDescription {
+  color: black;
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+.calendarGrid {
+  border-radius: 35px;
+  border: black 1px solid;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 0;
+  background-color: #fafbeb   ;
+}
+
+/* =========================== */
+/* SEÇÃO 4 - BENEFÍCIOS */
+/* =========================== */
+
+.benefitsSection {
+  padding: 80px 20px;
+  position: relative;
+  top: -80px;
 }
 
 .benefitsGrid {
@@ -223,47 +310,8 @@
   align-items: center;
 }
 
-.benefitItem img {
-  margin-bottom: 15px;
-}
-
-
 /* =========================== */
-/* CALENDÁRIO DE VACINAÇÃO     */
-/* =========================== */
-
-.calendarSection {
-  background-color: #073564;
-  padding: 80px 20px;
-  position: relative;
-  top: -80px;
-  text-align: center;
-}
-
-.sectionDescription {
-  color: white;
-  font-size: 18px;
-}
-
-.calendarButton {
-  margin-top: 20px;
-  padding: 10px 30px;
-  border-radius: 30px;
-  background-color: #4a64b8;
-  color: white;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.calendarButton:hover {
-  background-color: #3b50a1;
-}
-
-
-/* =========================== */
-/* FAQ - PERGUNTAS FREQUENTES  */
+/* SEÇÃO 5 - FAQ */
 /* =========================== */
 
 .faqSection {
@@ -298,10 +346,18 @@
 .faqItem h3 {
   margin-bottom: 10px;
   font-size: 20px;
-  color: #4a64b8;
+  color: #5a6499;
 }
 
 .faqItem p {
   font-size: 16px;
   line-height: 1.5;
+}
+
+
+.line{
+  width: 100%;
+  height: 2px;
+  background-color: #dbdbdb ;
+  
 }
