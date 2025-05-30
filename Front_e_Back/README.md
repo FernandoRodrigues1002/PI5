@@ -17,3 +17,5 @@ uvicorn main:app --reload
 ## Execute a aplicação (dev): 
 
 npm run dev
+
+
