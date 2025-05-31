@@ -1,4 +1,3 @@
-# schemas.py
 from marshmallow import Schema, fields, validate, validates, ValidationError
 import re
 
@@ -14,4 +13,4 @@ class UsuarioSchema(Schema):
     email = fields.Email(required=True)
     senha = fields.Str(required=True, validate=validate.Length(min=6))
     cpf = fields.Str(required=False, validate=validar_cpf)
-    premium = fields.Boolean(required=False, missing=False)
+    premium = fields.Boolean(required=False, load_default=False)
