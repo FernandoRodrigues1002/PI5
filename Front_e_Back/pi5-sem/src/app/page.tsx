@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./home.module.css";
+import { MapPin, Syringe, Calendar, Pill } from 'lucide-react';
 
 import Card from "./components/cards/card";
 
@@ -106,6 +107,28 @@ export default function Home() {
         </p>
       </header>
 
+      <div className={styles.cardsContainer}>
+      <div className={styles.card}>
+        <MapPin className={styles.cardIcon} />
+        <p className={styles.cardText}>Localizar<br /> Vacina</p>
+      </div>
+
+      <div className={styles.card}>
+        <Syringe className={styles.cardIcon} />
+        <p className={styles.cardText}>Vacinas<br /> Disponíveis</p>
+      </div>
+
+      <div className={styles.card}>
+        <Calendar className={styles.cardIcon} />
+        <p className={styles.cardText}>Calendário</p>
+      </div>
+
+      <div className={styles.card}>
+        <Pill className={styles.cardIcon} />
+        <p className={styles.cardText}>Remédios Disponíveis</p>
+      </div>
+    </div>
+      
       <div className={styles.line}></div>
 
       <section className={styles.mapAndAnimationWrapper}>
