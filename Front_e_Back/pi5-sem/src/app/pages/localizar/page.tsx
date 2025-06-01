@@ -126,7 +126,7 @@ export default function Localizar() {
 
   return (
     <>
-      <Head>
+      <div className={styles.container}>
         <title>Mapa de Postos</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -135,7 +135,7 @@ export default function Localizar() {
           rel="stylesheet"
           href="https://unpkg.com/leaflet/dist/leaflet.css"
         />
-      </Head>
+      </div>
       <div id="map" ref={mapRef} className={styles.map}></div>
       <div id="overlay" className={styles.overlay}>
         <span id="overlay-content"></span>

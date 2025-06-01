@@ -40,23 +40,20 @@
   position: relative;
 }
 
-/* Destacar o "Início" */
 .navLinks a:first-child {
   font-weight: 700;
   color: #2563eb;
 }
 
-.navLinks a:hover {
+.navLinks a:hover, .authLinks:hover {
   color: #2563eb;
 }
 
 .authLinks {
   display: flex;
   align-items: center;
-}
-
-.authLinks {
   margin-right: 4rem;
   font-weight: 700;
   color: #1f2937;
 }
+
