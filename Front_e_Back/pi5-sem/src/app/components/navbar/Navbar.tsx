@@ -22,7 +22,7 @@ export default function Navbar() {
       </div>
       <nav className={styles.navLinks}>
         <Link href="/">Início</Link>
-        <Link href="/pages/localiza">Localizar</Link>
+        <Link href="/pages/localizar">Localizar</Link>
         <Link href="/pages/calendario">Calendario</Link>
         <Link href="/pages/assinatura">assinatura</Link>
         <Link href="/pages/login">Entrar</Link>

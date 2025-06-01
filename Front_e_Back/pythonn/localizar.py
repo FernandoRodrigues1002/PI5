@@ -6,12 +6,8 @@ import requests
 import mysql.connector
 import random
 
-templates = Jinja2Templates(directory="templates")
-
 
 app = FastAPI()
-
-app.mount("/static", StaticFiles(directory="static"), name="static")
 def conectar_mysql():
     return mysql.connector.connect(
         host="yamabiko.proxy.rlwy.net",
@@ -103,9 +99,9 @@ def buscar_postos_osm(lat, lon, raio_m=2000):
 
 
 
-@app.get("/", response_class=HTMLResponse)
-async def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+# @app.get("/", response_class=HTMLResponse)
+# async def home(request: Request):
+#     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/postos_proximos")
 async def postos(lat: float, lon: float):
