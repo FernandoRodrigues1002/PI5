@@ -18,7 +18,7 @@ export default function Footer() {
       </div>
       <div className={styles.footerRight}>
         <a href="#">Direitos</a>
-        <a href="#">Sobre</a>
+        <a href="/pages/sobre">Sobre</a>
         <a href="#">Contato</a>
       </div>
     </footer>
