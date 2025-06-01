@@ -11,8 +11,27 @@
   align-items: center;
   padding: 40px 20px;
   box-sizing: border-box;
-
+  background-image: url("/images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
 }
+
+.headerContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* escurece a imagem de fundo */
+  z-index: 0;
+}
+
+.tileHeader,
+.descriptionHeader {
+  position: relative; /* Para ficar acima do overlay */
+  z-index: 1;
+}
+
 
 .tileHeader {
   font-size: 5rem;
@@ -31,7 +50,7 @@
 
 .descriptionHeader {
   font-size: 1.8rem;
-  color: #4a5568;
+  color: #fff;
   text-align: center;
   line-height: 1.6;
   max-width: 900px;
