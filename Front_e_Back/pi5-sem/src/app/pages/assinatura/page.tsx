@@ -10,8 +10,8 @@ export default function Page() {
   const router = useRouter();
 
   const handleSubscribe = () => {
-    alert("Obrigado por escolher a assinatura premium!");
-    router.push("/");
+    // Redireciona para a página de pagamento
+    router.push("/pages/pagamento");
   };
 
   return (
@@ -59,9 +59,11 @@ export default function Page() {
         </div>
       </div>
 
-      <button className={styles.subscribeButton} onClick={handleSubscribe}>
-        Assinar Agora
-      </button>
+      
+    <button className={styles.subscribeButton} onClick={handleSubscribe}>
+      Assinar Agora
+    </button>
+    
 
       <p className={styles.backLink}>
         <Link href="/">Voltar para a página inicial</Link>
