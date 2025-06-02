@@ -1,0 +1,57 @@
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9fb;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  color: #222;
+}
+
+.title {
+  text-align: center;
+  color: #2a4d69;
+  margin-bottom: 16px;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.intro {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ccc;
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.table th {
+  background-color: #2a4d69;
+  color: white;
+  font-weight: 600;
+}
+
+.vacinaNome {
+  font-weight: 600;
+  color: #1b355a;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #555;
+  font-style: italic;
+  text-align: center;
+}

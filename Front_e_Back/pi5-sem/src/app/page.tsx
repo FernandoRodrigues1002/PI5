@@ -115,7 +115,7 @@ export default function Home() {
           </div>
         </a>
 
-        <a href="/">
+        <a href="/vacinas">
           <div className={styles.card}>
             <Syringe className={styles.cardIcon} />
             <p className={styles.cardText}>Vacinas<br /> Disponíveis</p>
@@ -129,7 +129,7 @@ export default function Home() {
           </div>
         </a>
 
-        <a href="/">
+        <a href="/login">
           <div className={styles.card}>
             <Pill className={styles.cardIcon} />
             <p className={styles.cardText}>Remédios Disponíveis</p>
@@ -230,11 +230,11 @@ export default function Home() {
         </p>
 
         <div className={styles.calendarGrid}>
-          <Card title="Criança" href="/crianca" />
-          <Card title="Jovem e Adolescente" href="/jovem" />
-          <Card title="Adulto" href="/adulto" />
-          <Card title="Gestante" href="/gestante" />
-          <Card title="Idoso" href="/idoso" />
+          <Card title="Criança" href="./pages/crianca" />
+          <Card title="Jovem e Adolescente" href="./pages/jovem" />
+          <Card title="Adulto" href="./pages/adulto" />
+          <Card title="Gestante" href="./pages/gestante" />
+          <Card title="Idoso" href="./pages/idoso" />
         </div>
       </section>
 
