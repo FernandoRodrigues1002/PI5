@@ -3,9 +3,21 @@
 import Link from 'next/link';
 import styles from './Login.module.css';
 import { useLogin } from './useLogin';
+import { useEffect } from 'react';
+
 
 export default function LoginPage() {
   const { formData, handleChange, handleSubmit, erro, loading } = useLogin();
+  useEffect(() => {
+  // Quando o componente monta, desabilita o scroll
+  document.body.style.overflow = 'hidden';
+
+  // Quando desmonta (navega para outra página), reativa o scroll
+  return () => {
+    document.body.style.overflow = 'auto';
+  };
+}, []);
+
 
   return (
     <div className={styles.container}>

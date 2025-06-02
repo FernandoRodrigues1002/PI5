@@ -219,7 +219,7 @@
   justify-content: center;
   background-color: #4a64b8;
   border-radius: 9999px; 
-  box-shadow: 0 10px 15px -3px rgba(29, 78, 216, 0.7), 0 4px 6px -2px rgba(29, 78, 216, 0.5);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.7), 0 4px 6px -2px rgba(0, 0, 0, 0.5);
   width: 8rem; /* 32 */
   height: 8rem;
   cursor: pointer;
