@@ -8,14 +8,14 @@ export default function Localizar() {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    import("leaflet").then(L => {
+    import("leaflet").then((L) => {
       if (!mapRef.current) return;
 
-      // Remove mapa anterior se já existir
-      if (mapRef.current && mapRef.current._leaflet_id) {
-        // @ts-ignore
-        mapRef.current._leaflet_id = null;
-        mapRef.current.innerHTML = "";
+      // Se já tiver um mapa, remova antes de criar outro
+      if ((mapRef.current as any)._leaflet_map) {
+        const existingMap = (mapRef.current as any)._leaflet_map;
+        existingMap.remove();
+        delete (mapRef.current as any)._leaflet_map;
       }
 
       // Corrige ícones do Leaflet no Next.js
@@ -23,31 +23,27 @@ export default function Localizar() {
       L.Icon.Default.mergeOptions({
         iconRetinaUrl:
           "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-        iconUrl:
-          "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-        shadowUrl:
-          "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+        iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+        shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
       });
 
       navigator.geolocation.getCurrentPosition(async (position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
 
-        // Só cria o mapa se ainda não existe
         if (!mapRef.current) return;
-        // @ts-ignore
-        if (mapRef.current._leaflet_map) return;
 
-        // @ts-ignore
         const map = L.map(mapRef.current).setView([lat, lon], 14);
-        // @ts-ignore
-        mapRef.current._leaflet_map = map;
+        (mapRef.current as any)._leaflet_map = map;
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 19,
         }).addTo(map);
 
-        L.marker([lat, lon]).addTo(map).bindPopup("Você está aqui").openPopup();
+        L.marker([lat, lon])
+          .addTo(map)
+          .bindPopup("Você está aqui")
+          .openPopup();
 
         const redIcon = new L.Icon({
           iconUrl:
@@ -61,7 +57,6 @@ export default function Localizar() {
         });
 
         try {
-          // Altere a URL se necessário para acessar o backend Python
           const response = await fetch(
             `/postos_proximos?lat=${lat}&lon=${lon}`
           );
@@ -86,7 +81,8 @@ export default function Localizar() {
                     `detalhes-${p.lat}-${p.lon}`
                   );
                   if (btn) {
-                    btn.onclick = () => (window as any).mostrarOverlay(p.nome, p.medicamentos);
+                    btn.onclick = () =>
+                      (window as any).mostrarOverlay(p.nome, p.medicamentos);
                   }
                 }, 0);
               });
@@ -127,16 +123,15 @@ export default function Localizar() {
   return (
     <>
       <div className={styles.container}>
-        <title>Mapa de Postos</title>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {/* Leaflet CSS */}
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/leaflet/dist/leaflet.css"
-        />
-      </div>
+          <title>Mapa de Postos</title>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet/dist/leaflet.css"
+          />
       <div id="map" ref={mapRef} className={styles.map}></div>
+      </div>
       <div id="overlay" className={styles.overlay}>
         <span id="overlay-content"></span>
         <button onClick={() => (window as any).fecharOverlay()}>Fechar</button>
