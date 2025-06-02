@@ -108,28 +108,34 @@ export default function Home() {
       </header>
 
       <div className={styles.cardsContainer}>
-      <div className={styles.card}>
-        <MapPin className={styles.cardIcon} />
-        <p className={styles.cardText}>Localizar<br /> Vacina</p>
-      </div>
+        <a href="/pages/localizar">
+          <div className={styles.card}>
+            <MapPin className={styles.cardIcon} />
+            <p className={styles.cardText}>Localizar<br /> Vacina</p>
+          </div>
+        </a>
 
-      <div className={styles.card}>
-        <Syringe className={styles.cardIcon} />
-        <p className={styles.cardText}>Vacinas<br /> Disponíveis</p>
-      </div>
+        <a href="/">
+          <div className={styles.card}>
+            <Syringe className={styles.cardIcon} />
+            <p className={styles.cardText}>Vacinas<br /> Disponíveis</p>
+          </div>
+        </a>
 
-      <div className={styles.card}>
-        <Calendar className={styles.cardIcon} />
-        <p className={styles.cardText}>Calendário</p>
-      </div>
+        <a href="/pages/calendario">
+          <div className={styles.card}>
+            <Calendar className={styles.cardIcon} />
+            <p className={styles.cardText}>Calendário</p>
+          </div>
+        </a>
 
-      <div className={styles.card}>
-        <Pill className={styles.cardIcon} />
-        <p className={styles.cardText}>Remédios Disponíveis</p>
+        <a href="/">
+          <div className={styles.card}>
+            <Pill className={styles.cardIcon} />
+            <p className={styles.cardText}>Remédios Disponíveis</p>
+          </div>
+        </a>
       </div>
-    </div>
-      
-      <div className={styles.line}></div>
 
       <section className={styles.mapAndAnimationWrapper}>
         <div className={styles.mapSection}>
@@ -177,11 +183,9 @@ export default function Home() {
         </div>
       </section>
 
-      <div className={styles.line}></div>
-
       <section className={styles.news1}>
         <div className={styles.newTitle}>
-          <h2>Vacine-se!</h2>
+          <h2>Como vou encontrar minha Vacina?</h2>
         </div>
 
         <div className={styles.newsContainer}>
@@ -189,37 +193,30 @@ export default function Home() {
             <div className={styles.newText}>
               <div className={styles.textBox}>
                 <p>
-                  Você pode se vacinar gratuitamente nas salas de vacinação nas
-                  Unidades Básicas de Saúde - UBS em todo o País. Consulte o
-                  calendário de vacinação e verifique quais vacinas estão
-                  disponíveis na sua região.
+                  Para encontrar sua vacina com o MedLocator, basta permitir que o site acesse sua localização atual. 
+                  Em poucos segundos, mostramos as Unidades Básicas de Saúde (UBSs) mais próximas de você e indicamos se elas têm a vacina disponível.
+                   Assim, você economiza tempo e evita deslocamentos desnecessários, indo direto ao local certo.
                 </p>
               </div>
               <div className={styles.textBox}>
                 <p>
-                  Lembrando que a vacinação é um direito de todos e uma
-                  responsabilidade social. Vacine-se e proteja a si mesmo e a
-                  sua comunidade!
+                  Quer saber onde encontrar a vacina que precisa? 
+                  É simples! Digite o nome da vacina no campo de busca do MedLocator e, automaticamente, 
+                  nossa plataforma verifica a disponibilidade nas UBSs próximas ao seu endereço. 
+                  Você terá informações atualizadas para planejar sua ida com segurança e praticidade.
                 </p>
               </div>
               <div className={styles.textBox}>
                 <p>
-                  A ausência do Cartão de Vacinação não impede que você seja
-                  vacinado. Vá à UBS onde recebeu as vacinas e faça a segunda
-                  via do seu cartão, ou solicite em uma outra unidade um novo
-                  cartão. O cartão de vacinação é o documento que comprova a sua
-                  situação vacinal. Lembre-se de guarda-lo junto aos seus
-                  documentos pessoais.
+                  Com o MedLocator, localizar sua vacina ficou fácil e rápido. 
+                  Basta usar a geolocalização do seu dispositivo ou informar seu endereço manualmente. 
+                  Nosso sistema verifica em tempo real quais unidades de saúde possuem a vacina que você procura, 
+                  garantindo que você tenha acesso rápido e seguro à imunização.
                 </p>
               </div>
             </div>
           </div>
 
-          {vacinaAnim && (
-            <div className={styles.animationWrapper}>
-              <Lottie animationData={vacinaAnim} loop={true} />
-            </div>
-          )}
         </div>
       </section>
 

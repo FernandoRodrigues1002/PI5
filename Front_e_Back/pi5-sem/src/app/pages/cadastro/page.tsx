@@ -5,6 +5,7 @@ import styles from "./cadastro.module.css";
 import { useRouter } from "next/navigation";
 import { cadastrarUsuario } from "./useCadstro";
 import Link from "next/link";
+import { useEffect } from 'react';
 
 export default function Page() {
   const router = useRouter();
@@ -89,6 +90,16 @@ export default function Page() {
   };
 
   const progressPercent = (step / 3) * 100;
+
+    useEffect(() => {
+  // Quando o componente monta, desabilita o scroll
+  document.body.style.overflow = 'hidden';
+
+  // Quando desmonta (navega para outra página), reativa o scroll
+  return () => {
+    document.body.style.overflow = 'auto';
+  };
+}, []);
 
   return (
     <div className={styles.medicalBg}>

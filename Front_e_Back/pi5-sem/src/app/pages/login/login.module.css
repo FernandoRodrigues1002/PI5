@@ -3,20 +3,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f9fafb;
+  background-image: url("/images/login.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
   padding: 3rem 1rem;
 }
 
 .cardLogin {
   height: auto;
   width: 100%;
-  max-width: 400px; 
-  border-radius: 0.5rem; 
-  background-color: #ffffff; 
-  padding: 2rem; 
-  box-shadow: 
-  0 -4px 8px rgba(0, 0, 0, 0.4),
-  0 4px 8px rgba(0, 0, 0, 0.4);   
+  max-width: 400px;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  padding: 2rem;
+  box-shadow:
+    0 -4px 8px rgba(0, 0, 0, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.4);
 
 }
 
