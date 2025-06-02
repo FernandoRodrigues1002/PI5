@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import styles from "./sobre.module.css";
+import { Laptop } from 'lucide-react'; 
 
 export default function Sobre() {
   return (
     <>
-
       <main className={styles.main}>
         <section className={styles.hero}>
           <h1>Sobre o Projeto</h1>
@@ -60,8 +60,31 @@ export default function Sobre() {
             acesso rápido às informações essenciais para sua saúde.
           </p>
         </section>
+
+        <div className={styles.cardsContainer}>
+          <div className={styles.card}>
+            <Laptop className={styles.laptopIcon} />
+            <p className={styles.cardText}>Olavo Moretto</p>
+          </div>
+
+          <div className={styles.card}>
+            <Laptop className={styles.laptopIcon} />
+            <p className={styles.cardText}>Fernando Rodrigues</p>
+          </div>
+
+          <div className={styles.card}>
+            <Laptop className={styles.laptopIcon} />
+            <p className={styles.cardText}>Eric Cordeiro</p>
+          </div>
+
+          <div className={styles.card}>
+            <Laptop className={styles.laptopIcon} />
+            <p className={styles.cardText}>João Pedro</p>
+          </div>
+        </div>
+        
+        <div className={styles.line}></div>
       </main>
-      
     </>
   );
 }

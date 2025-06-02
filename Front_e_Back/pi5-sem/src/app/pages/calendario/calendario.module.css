@@ -1,0 +1,55 @@
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.card {
+  background: #e0f7fa;
+  border-radius: 8px;
+  padding: 15px;
+  width: 140px;
+  text-align: center;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+.dateBox {
+  background: #00796b;
+  color: white;
+  border-radius: 4px;
+  padding: 5px 0;
+  margin-bottom: 8px;
+}
+
+.day {
+  font-size: 24px;
+  font-weight: bold;
+  display: block;
+}
+
+.month {
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.vaccineName {
+  font-weight: 600;
+  color: #004d40;
+}
+
+.loading, .error {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 50px;
+}
