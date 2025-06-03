@@ -11,6 +11,43 @@ import Lottie from "lottie-react";
 import "leaflet/dist/leaflet.css";
 
 export default function Home() {
+  const faqSections = [
+    {
+      title: "Vacinas",
+      faqs: [
+        {
+          question: "O que são as vacinas?",
+          answer: "As vacinas são substâncias preparadas e aplicadas na população para proteger contra doenças graves e muitas vezes fatais..."
+        },
+        {
+          question: "Como as vacinas funcionam?",
+          answer: "As vacinas ajudam o sistema de defesa da pessoa a combater infecções de maneira mais eficiente..."
+        }
+      ]
+    },
+    {
+      title: "Agendamento",
+      faqs: [
+        {
+          question: "Como agendar a vacinação?",
+          answer: "Você pode agendar a vacinação diretamente pelo site ou aplicativo MedLocator..."
+        },
+        {
+          question: "Posso cancelar meu agendamento?",
+          answer: "Sim, o cancelamento pode ser feito até 24 horas antes da data marcada."
+        }
+      ]
+    }
+  ];
+
+const [activeIndex, setActiveIndex] = useState<string | null>(null);
+
+const toggleFAQ = (index: string) => {
+  setActiveIndex(activeIndex === index ? null : index);
+};
+
+
+
   const [vacinaAnim, setVacinaAnim] = useState(null);
   const [doctorAnim, setDoctorAnim] = useState(null);
   const [comunityAnim, setComunityAnim] = useState(null);
@@ -238,60 +275,39 @@ export default function Home() {
         </div>
       </section>
 
-      <div className={styles.line}></div>
+      <section className={styles.faqSection}>
+        <h2 className={styles.sectionTitle}>Perguntas Frequentes (FAQ)</h2>
 
-      <section className={styles.benefitsSection}>
-        <h2 className={styles.sectionTitle}>Por que se vacinar?</h2>
-        <div className={styles.benefitsGrid}>
-          <div className={styles.benefitItem}>
-            <div className={styles.comunityAnimation}>
-              <Lottie animationData={protectedAnim} loop={true} />
-            </div>
-            <p>Previne doenças graves</p>
-          </div>
-          <div className={styles.benefitItem}>
-            <div className={styles.comunityAnimation}>
-              <Lottie animationData={slaAnim} loop={true} />
-            </div>
-            <p>Protege a comunidade</p>
-          </div>
-          <div className={styles.benefitItem}>
-            <div className={styles.comunityAnimation}>
-              <Lottie animationData={comunityAnim} loop={true} />
-            </div>
-            <p>Ajuda a controlar surtos</p>
-          </div>
-        </div>
+        {faqSections.map((section, sectionIndex) => (
+          <div key={sectionIndex} className={styles.faqSectionBlock}>
+            <h3 className={styles.faqSectionTitle}>{section.title}</h3>
 
-        <div className={styles.line}></div>
+            <div className={styles.faqContainer}>
+              {section.faqs.map((faq, faqIndex) => {
+                const index = `${sectionIndex}-${faqIndex}`;
+                return (
+                  <div key={index} className={styles.faqItem}>
+                    <h4
+                      onClick={() => toggleFAQ(index)}
+                      className={styles.faqQuestion}
+                    >
+                      {faq.question}
+                      <span className={styles.arrow}>
+                        {activeIndex === index ? '▲' : '▼'}
+                      </span>
+                    </h4>
 
-        <section className={styles.faqSection}>
-          <h2 className={styles.sectionTitle}>Perguntas Frequentes</h2>
-          <div className={styles.faqContainer}>
-            <div className={styles.faqItem}>
-              <h3>Vacina causa autismo?</h3>
-              <p>
-                Não. Não há nenhuma evidência científica que comprove essa
-                relação.
-              </p>
-            </div>
-            <div className={styles.faqItem}>
-              <h3>Posso tomar mais de uma vacina no mesmo dia?</h3>
-              <p>
-                Sim, em geral é seguro. Mas consulte o profissional de saúde
-                antes.
-              </p>
-            </div>
-            <div className={styles.faqItem}>
-              <h3>É obrigatório vacinar meu filho?</h3>
-              <p>
-                Sim. O Estatuto da Criança e do Adolescente prevê a vacinação como
-                obrigatória.
-              </p>
+                    {activeIndex === index && (
+                      <p className={styles.faqAnswer}>{faq.answer}</p>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </div>
-        </section>
+        ))}
       </section>
+
     </>
   );
 }
