@@ -46,8 +46,6 @@ const toggleFAQ = (index: string) => {
   setActiveIndex(activeIndex === index ? null : index);
 };
 
-
-
   const [vacinaAnim, setVacinaAnim] = useState(null);
   const [doctorAnim, setDoctorAnim] = useState(null);
   const [comunityAnim, setComunityAnim] = useState(null);
@@ -94,8 +92,6 @@ const toggleFAQ = (index: string) => {
             iconUrl: "/images/marker-icon.png",
             shadowUrl: "/images/marker-shadow.png",
           });
-
-
 
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
@@ -307,7 +303,6 @@ const toggleFAQ = (index: string) => {
           </div>
         ))}
       </section>
-
     </>
   );
 }
