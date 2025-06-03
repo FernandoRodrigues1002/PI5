@@ -107,81 +107,83 @@ export default function Home() {
         </p>
       </header>
 
-      <div className={styles.cardsContainer}>
-        <a href="/pages/localizar">
-          <div className={styles.card}>
-            <MapPin className={styles.cardIcon} />
-            <p className={styles.cardText}>Localizar<br /> Vacina</p>
-          </div>
-        </a>
+      <div className={styles.containerMap}>
+        <div className={styles.cardsContainer}>
+          <a href="/pages/localizar">
+            <div className={styles.card}>
+              <MapPin className={styles.cardIcon} />
+              <p className={styles.cardText}>Localizar<br /> Vacina</p>
+            </div>
+          </a>
 
-        <a href="/vacinas">
-          <div className={styles.card}>
-            <Syringe className={styles.cardIcon} />
-            <p className={styles.cardText}>Vacinas<br /> Disponíveis</p>
-          </div>
-        </a>
+          <a href="/vacinas">
+            <div className={styles.card}>
+              <Syringe className={styles.cardIcon} />
+              <p className={styles.cardText}>Vacinas<br /> Disponíveis</p>
+            </div>
+          </a>
 
-        <a href="/pages/calendario">
-          <div className={styles.card}>
-            <Calendar className={styles.cardIcon} />
-            <p className={styles.cardText}>Calendário</p>
-          </div>
-        </a>
+          <a href="/pages/calendario">
+            <div className={styles.card}>
+              <Calendar className={styles.cardIcon} />
+              <p className={styles.cardText}>Calendário</p>
+            </div>
+          </a>
 
-        <a href="/login">
-          <div className={styles.card}>
-            <Pill className={styles.cardIcon} />
-            <p className={styles.cardText}>Remédios Disponíveis</p>
-          </div>
-        </a>
-      </div>
-
-      <section className={styles.mapAndAnimationWrapper}>
-        <div className={styles.mapSection}>
-          <div className={styles.mapBg}>
-            <div id="map" className={styles.map}></div>
-            <Image
-              id="fallback-image"
-              src="/images/map-fallback.png"
-              alt="Mapa padrão"
-              width={600}
-              height={600}
-              style={{
-                display: "none",
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-            />
-          </div>
+          <a href="/login">
+            <div className={styles.card}>
+              <Pill className={styles.cardIcon} />
+              <p className={styles.cardText}>Remédios Disponíveis</p>
+            </div>
+          </a>
         </div>
 
-        <div className={styles.animationBox}>
-          {doctorAnim && (
-            <>
-              <div className={styles.doctorAnimation}>
-                <Lottie animationData={doctorAnim} loop={true} />
-              </div>
+        <section className={styles.mapAndAnimationWrapper}>
+          <div className={styles.mapSection}>
+            <div className={styles.mapBg}>
+              <div id="map" className={styles.map}></div>
+              <Image
+                id="fallback-image"
+                src="/images/map-fallback.png"
+                alt="Mapa padrão"
+                width={600}
+                height={600}
+                style={{
+                  display: "none",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            </div>
+          </div>
 
-              <div className={styles.textInputColumn}>
-                <p className={styles.animationText}>ENCONTRE SUA VACINA!</p>
-                <div className={styles.pesquisa}>
-                  <input type="text" placeholder="Digite seu CEP" />
-                  <button>
-                    <Image
-                      src="/svgs/lupa.svg"
-                      alt="Buscar"
-                      width={20}
-                      height={20}
-                    />
-                  </button>
+          <div className={styles.animationBox}>
+            {doctorAnim && (
+              <>
+                <div className={styles.doctorAnimation}>
+                  <Lottie animationData={doctorAnim} loop={true} />
                 </div>
-              </div>
-            </>
-          )}
-        </div>
-      </section>
+
+                <div className={styles.textInputColumn}>
+                  <p className={styles.animationText}>ENCONTRE SUA VACINA!</p>
+                  <div className={styles.pesquisa}>
+                    <input type="text" placeholder="Digite seu CEP" />
+                    <button>
+                      <Image
+                        src="/svgs/lupa.svg"
+                        alt="Buscar"
+                        width={20}
+                        height={20}
+                      />
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </section>
+      </div>
 
       <section className={styles.news1}>
         <div className={styles.newTitle}>
@@ -193,24 +195,24 @@ export default function Home() {
             <div className={styles.newText}>
               <div className={styles.textBox}>
                 <p>
-                  Para encontrar sua vacina com o MedLocator, basta permitir que o site acesse sua localização atual. 
+                  Para encontrar sua vacina com o MedLocator, basta permitir que o site acesse sua localização atual.
                   Em poucos segundos, mostramos as Unidades Básicas de Saúde (UBSs) mais próximas de você e indicamos se elas têm a vacina disponível.
-                   Assim, você economiza tempo e evita deslocamentos desnecessários, indo direto ao local certo.
+                  Assim, você economiza tempo e evita deslocamentos desnecessários, indo direto ao local certo.
                 </p>
               </div>
               <div className={styles.textBox}>
                 <p>
-                  Quer saber onde encontrar a vacina que precisa? 
-                  É simples! Digite o nome da vacina no campo de busca do MedLocator e, automaticamente, 
-                  nossa plataforma verifica a disponibilidade nas UBSs próximas ao seu endereço. 
+                  Quer saber onde encontrar a vacina que precisa?
+                  É simples! Digite o nome da vacina no campo de busca do MedLocator e, automaticamente,
+                  nossa plataforma verifica a disponibilidade nas UBSs próximas ao seu endereço.
                   Você terá informações atualizadas para planejar sua ida com segurança e praticidade.
                 </p>
               </div>
               <div className={styles.textBox}>
                 <p>
-                  Com o MedLocator, localizar sua vacina ficou fácil e rápido. 
-                  Basta usar a geolocalização do seu dispositivo ou informar seu endereço manualmente. 
-                  Nosso sistema verifica em tempo real quais unidades de saúde possuem a vacina que você procura, 
+                  Com o MedLocator, localizar sua vacina ficou fácil e rápido.
+                  Basta usar a geolocalização do seu dispositivo ou informar seu endereço manualmente.
+                  Nosso sistema verifica em tempo real quais unidades de saúde possuem a vacina que você procura,
                   garantindo que você tenha acesso rápido e seguro à imunização.
                 </p>
               </div>
@@ -219,8 +221,6 @@ export default function Home() {
 
         </div>
       </section>
-
-      <div className={styles.line}></div>
 
       <section className={styles.calendarSection}>
         <h2 className={styles.sectionTitle}>Calendário de Vacinação</h2>
@@ -262,35 +262,35 @@ export default function Home() {
             <p>Ajuda a controlar surtos</p>
           </div>
         </div>
-      </section>
 
-      <div className={styles.line}></div>
+        <div className={styles.line}></div>
 
-      <section className={styles.faqSection}>
-        <h2 className={styles.sectionTitle}>Perguntas Frequentes</h2>
-        <div className={styles.faqContainer}>
-          <div className={styles.faqItem}>
-            <h3>Vacina causa autismo?</h3>
-            <p>
-              Não. Não há nenhuma evidência científica que comprove essa
-              relação.
-            </p>
+        <section className={styles.faqSection}>
+          <h2 className={styles.sectionTitle}>Perguntas Frequentes</h2>
+          <div className={styles.faqContainer}>
+            <div className={styles.faqItem}>
+              <h3>Vacina causa autismo?</h3>
+              <p>
+                Não. Não há nenhuma evidência científica que comprove essa
+                relação.
+              </p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3>Posso tomar mais de uma vacina no mesmo dia?</h3>
+              <p>
+                Sim, em geral é seguro. Mas consulte o profissional de saúde
+                antes.
+              </p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3>É obrigatório vacinar meu filho?</h3>
+              <p>
+                Sim. O Estatuto da Criança e do Adolescente prevê a vacinação como
+                obrigatória.
+              </p>
+            </div>
           </div>
-          <div className={styles.faqItem}>
-            <h3>Posso tomar mais de uma vacina no mesmo dia?</h3>
-            <p>
-              Sim, em geral é seguro. Mas consulte o profissional de saúde
-              antes.
-            </p>
-          </div>
-          <div className={styles.faqItem}>
-            <h3>É obrigatório vacinar meu filho?</h3>
-            <p>
-              Sim. O Estatuto da Criança e do Adolescente prevê a vacinação como
-              obrigatória.
-            </p>
-          </div>
-        </div>
+        </section>
       </section>
     </>
   );
