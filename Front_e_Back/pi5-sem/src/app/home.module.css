@@ -1,7 +1,6 @@
 /* =========================== */
 /* HEADER - H1 E DESCRIÇÃO */
 /* =========================== */
-
 .headerContainer {
   min-height: 100vh;
   display: flex;
@@ -10,12 +9,13 @@
   align-items: center;
   padding: 40px 20px;
   box-sizing: border-box;
-  background-image: url("/images/background.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
 }
+
 
 .headerContainer::before {
   content: "";
