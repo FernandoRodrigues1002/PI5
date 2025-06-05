@@ -3,16 +3,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --branco1 : #fff6ff;
+  --branco1: #fff6ff;
   --azul1: #5a6499;
   --azul2: #073564;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,12 +16,13 @@
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
   color: var(--foreground);
   font-family: var(--font-montserrat), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  height: 100%;
 }
 
 html {
@@ -36,13 +30,14 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   height: 100%;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  height: 100%;
+main {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: 100vh;
 }
 
 /* Scroll Snap Sections */
@@ -53,54 +48,23 @@ body {
   position: relative;
 }
 
-/* Transição suave para seções ativas */
+/* Transição suave */
 .section-active {
-  transition: transform 0.3s ease-out;
-}
-
-/* Previne o scroll bouncing no iOS */
-html, body {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: none;
-}
-
-/* Garante que o scroll snap funcione corretamente */
-main {
-  scroll-snap-type: y mandatory;
-  overflow-y: auto;
-  height: 100vh;
-}
-
-/* Para melhor performance em dispositivos móveis */
-* {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-}
-
-/* Melhora a performance do scroll */
-.scroll-snap-section {
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  transition: transform 2s ease-out;
 }
 
 /* Responsividade para scroll snap */
 @media (max-width: 768px) {
   html {
-    scroll-snap-type: y proximity; /* Menos rígido em mobile */
-  }
-  
-  .scroll-snap-section {
-    scroll-snap-align: start;
+    scroll-snap-type: y proximity;
   }
 }
 
-/* Desativa scroll snap em dispositivos muito pequenos se necessário */
 @media (max-width: 480px) {
   html {
-    scroll-snap-type: none; /* Remove completamente se causar problemas */
+    scroll-snap-type: none;
   }
-  
+
   .scroll-snap-section {
     scroll-snap-align: none;
   }

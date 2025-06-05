@@ -5,7 +5,7 @@ import Image from "next/image";
 import styles from "./home.module.css";
 
 import Card from "./components/cards/card";
-import ScrollSnapSection from "./components/section/ScrollSnapSection"; // Novo componente
+import ScrollSnapSection from "./components/section/ScrollSnapSection";
 
 import Lottie from "lottie-react";
 import "leaflet/dist/leaflet.css";
@@ -50,27 +50,39 @@ export default function Home() {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  // Estados das animações com verificação de carregamento
   const [doctorAnim, setDoctorAnim] = useState(null);
   const [comunityAnim, setComunityAnim] = useState(null);
   const [protectedAnim, setProtectedAnim] = useState(null);
   const [slaAnim, setSlaAnim] = useState(null);
+  const [animationsLoaded, setAnimationsLoaded] = useState(false);
 
   useEffect(() => {
     const fetchAnimations = async () => {
       try {
         const [doctorRes, comunityRes, protectedRes, slaRes] =
           await Promise.all([
-            fetch("/animation/Animation3.json"),
-            fetch("/animation/Animation4.json"),
-            fetch("/animation/Animation5.json"),
-            fetch("/animation/Animation6.json"),
+            fetch("/animation/AnimationSearch.json"),
+            fetch("/animation/AnimationWorld.json"),
+            fetch("/animation/AnimationProtected.json"),
+            fetch("/animation/AnimationSla.json"),
           ]);
-        setDoctorAnim(await doctorRes.json());
-        setComunityAnim(await comunityRes.json());
-        setProtectedAnim(await protectedRes.json());
-        setSlaAnim(await slaRes.json());
+        
+        const [doctor, community, protectedAnim, sla] = await Promise.all([
+          doctorRes.json(),
+          comunityRes.json(),
+          protectedRes.json(),
+          slaRes.json(),
+        ]);
+
+        setDoctorAnim(doctor);
+        setComunityAnim(community);
+        setProtectedAnim(protectedAnim);
+        setSlaAnim(sla);
+        setAnimationsLoaded(true);
       } catch (err) {
         console.error("Erro ao carregar as animações:", err);
+        setAnimationsLoaded(false);
       }
     };
     fetchAnimations();
@@ -133,7 +145,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
+    <main className={styles.scrollContainer}>
       {/* Seção Header */}
       <ScrollSnapSection>
         <header className={styles.headerContainer}>
@@ -154,49 +166,55 @@ export default function Home() {
 
       {/* Seção Mapa */}
       <ScrollSnapSection>
-        <section className={styles.containerMap}>
-          <div className={styles.mapSection}>
-            <div className={styles.mapBg}>
-              <div id="map" className={styles.map}></div>
-              <Image
-                id="fallback-image"
-                src="/images/map-fallback.png"
-                alt="Mapa padrão"
-                width={600}
-                height={600}
-                style={{
-                  display: "none",
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
-            </div>
+        <section className={styles.containerMapSearch}>
+          <div className={styles.map}>
+            <div id="map" style={{ width: "100%", height: "100%" }}></div>
+            <Image
+              id="fallback-image"
+              src="/images/map-fallback.png"
+              alt="Mapa padrão"
+              width={600}
+              height={600}
+              style={{
+                display: "none",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
           </div>
 
           <div className={styles.animationBox}>
-            {doctorAnim && (
-              <>
-                <div className={styles.doctorAnimation}>
-                  <Lottie animationData={doctorAnim} loop={true} />
+            <div className={styles.doctorAnimation}>
+              {animationsLoaded && doctorAnim ? (
+                <Lottie 
+                  animationData={doctorAnim} 
+                  loop={true}
+                  style={{ width: '100%', height: '100%' }}
+                />
+              ) : (
+                <div className={styles.animationPlaceholder}>
+                  Carregando...
                 </div>
+              )}
+            </div>
 
-                <div className={styles.textInputColumn}>
-                  <p className={styles.animationText}>ENCONTRE SUA VACINA!</p>
-                  <div className={styles.pesquisa}>
-                    <input type="text" placeholder="Digite seu CEP" />
-                    <button>
-                      <Image
-                        src="/svgs/lupa.svg"
-                        alt="Buscar"
-                        width={20}
-                        height={20}
-                      />
-                    </button>
-                  </div>
-                </div>
-              </>
-            )}
+            <div className={styles.textInputColumn}>
+              <p className={styles.animationText}>ENCONTRE SUA VACINA!</p>
+
+              <div className={styles.pesquisa}>
+                <input type="number" autoComplete="off" id="cep" required />
+                <label htmlFor="cep">Digite seu CEP</label>
+                <button type="button">
+                  <Image
+                    src="/svgs/lupa.svg"
+                    alt="Buscar"
+                    width={16}
+                    height={16}
+                  />
+                </button>
+              </div>
+            </div>
           </div>
         </section>
       </ScrollSnapSection>
@@ -273,19 +291,49 @@ export default function Home() {
           <div className={styles.benefitsGrid}>
             <div className={styles.benefitItem}>
               <div className={styles.comunityAnimation}>
-                <Lottie animationData={protectedAnim} loop={true} />
+                {animationsLoaded && protectedAnim ? (
+                  <Lottie 
+                    animationData={protectedAnim} 
+                    loop={true}
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                ) : (
+                  <div className={styles.animationPlaceholder}>
+                    <div className={styles.loadingDot}></div>
+                  </div>
+                )}
               </div>
               <p>Previne doenças graves</p>
             </div>
             <div className={styles.benefitItem}>
               <div className={styles.comunityAnimation}>
-                <Lottie animationData={slaAnim} loop={true} />
+                {animationsLoaded && slaAnim ? (
+                  <Lottie 
+                    animationData={slaAnim} 
+                    loop={true}
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                ) : (
+                  <div className={styles.animationPlaceholder}>
+                    <div className={styles.loadingDot}></div>
+                  </div>
+                )}
               </div>
               <p>Protege a comunidade</p>
             </div>
             <div className={styles.benefitItem}>
               <div className={styles.comunityAnimation}>
-                <Lottie animationData={comunityAnim} loop={true} />
+                {animationsLoaded && comunityAnim ? (
+                  <Lottie 
+                    animationData={comunityAnim} 
+                    loop={true}
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                ) : (
+                  <div className={styles.animationPlaceholder}>
+                    <div className={styles.loadingDot}></div>
+                  </div>
+                )}
               </div>
               <p>Ajuda a controlar surtos</p>
             </div>

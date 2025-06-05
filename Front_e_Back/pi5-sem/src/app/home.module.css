@@ -1,15 +1,27 @@
 /* =========================== */
+/* SCROLL SNAP CONTAINER */
+/* =========================== */
+.scrollContainer {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: 100vh;
+  scroll-behavior: smooth;
+}
+
+/* =========================== */
 /* HEADER - SEÇÃO PRINCIPAL */
 /* =========================== */
 .headerContainer {
   height: 100vh;
-  min-height: 100vh; /* Garante altura mínima */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
   overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .headerBackgroundImage {
@@ -37,7 +49,7 @@
 }
 
 .tileHeader {
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: 800;
   margin-bottom: 2rem;
   background: linear-gradient(135deg, #4facfe, #00f2fe);
@@ -52,7 +64,7 @@
 }
 
 .descriptionHeader {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   color: #fff;
   text-align: center;
   line-height: 1.6;
@@ -78,41 +90,34 @@
 /* =========================== */
 /* SEÇÃO DO MAPA E BUSCA */
 /* =========================== */
-.containerMap {
+.containerMapSearch {
   height: 100vh;
-  min-height: 100vh; /* Garante altura mínima */
+  min-height: 100vh;
   background-color: #5a6499;
   display: flex;
-  width: 100%;
-  padding: 50px 10%;
-  box-sizing: border-box;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  padding: 0 10%;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
-.mapSection {
+.map {
   flex: 3;
-  height: 600px;
+  max-width: 75%;
+  height: 50vh;
   position: relative;
-  border-top-left-radius: 50px;
-  overflow: hidden;
-}
-
-.mapBg {
-  position: absolute;
-  inset: 0;
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   overflow: hidden;
 }
 
-.map {
-  width: 100%;
-  height: 100%;
-}
-
 .animationBox {
   flex: 1;
-  height: 600px;
+  max-width: 25%;
+  height: 50vh;
   padding: 20px;
   background-color: #1e40af;
   display: flex;
@@ -124,62 +129,150 @@
   box-sizing: border-box;
 }
 
+/* =========================== */
+/* ANIMAÇÕES - CONFIGURAÇÕES LIMPAS */
+/* =========================== */
 .doctorAnimation {
   width: 100%;
-  height: 300px;
+  height: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
 }
 
-.textInputColumn {
+.doctorAnimation > div {
+  width: 100%;
+  height: 100%;
+}
+
+.comunityAnimation {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  position: relative;
+}
+
+.comunityAnimation > div {
+  width: 100%;
+  height: 100%;
+}
+
+/* Placeholder para animações carregando */
+.animationPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: white;
+  font-size: 0.8rem;
+  text-align: center;
+  position: relative;
+}
+
+/* Loading dot animation */
+.loadingDot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
 }
 
 .animationText {
   color: #fff;
-  font-size: 18px;
+  font-size: 0.7rem;
   font-weight: bold;
 }
 
 .pesquisa {
+  margin: 1em 0;
+  max-width: 190px;
   position: relative;
-  width: 80%;
 }
 
 .pesquisa input {
-  width: 100%;
-  padding: 10px 40px 10px 15px;
-  border-radius: 30px;
-  border: 1px solid white;
-  font-size: 16px;
+  font-size: 100%;
+  padding: 0.8em 2.5em 0.8em 0.8em;
+  height: 30px;
   outline: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgb(141, 109, 255);
+  background-color: transparent;
+  border-radius: 20px;
+  width: 100%;
+  color: white;
+  appearance: textfield;
 }
 
-.pesquisa input::placeholder {
+.pesquisa input::-webkit-outer-spin-button,
+.pesquisa input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.pesquisa input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.pesquisa label {
+  font-size: 100%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.8em;
+  margin-left: 0.5em;
+  pointer-events: none;
+  transition: all 0.3s ease;
   color: white;
+}
+
+.pesquisa input:focus ~ label,
+.pesquisa input:valid ~ label {
+  transform: translateY(-130%) scale(0.85);
+  margin-left: 1.2em;
+  padding: 0 0.3em;
+  background-color: black;
+  border-radius: 4px;
 }
 
 .pesquisa button {
   position: absolute;
-  right: 10px;
   top: 50%;
+  right: 10px;
   transform: translateY(-50%);
   background: none;
   border: none;
-  padding: 0;
   cursor: pointer;
-  color: #fff;
+  padding: 0;
 }
 
 .pesquisa button img {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 /* =========================== */
@@ -188,7 +281,6 @@
 .news1 {
   width: 100%;
   height: 100vh;
-  min-height: 100vh; /* Garante altura mínima */
   position: relative;
   padding: 80px 10% 40px 10%;
   background-color: #4a64b8;
@@ -199,7 +291,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-sizing: border-box; /* Inclui padding no cálculo da altura */
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .newTitle {
@@ -240,7 +334,7 @@
   padding: 16px;
   color: #fff;
   text-align: justify;
-  font-size: 1.2rem;
+  font-size: 0.5rem;
   line-height: 1.6;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
@@ -250,7 +344,7 @@
 /* =========================== */
 .calendarSection {
   height: 100vh;
-  min-height: 100vh; /* Garante altura mínima */
+  min-height: 100vh;
   padding: 80px 20px;
   text-align: center;
   background-image: url("/images/calendario.jpg");
@@ -261,7 +355,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box; /* Inclui padding no cálculo da altura */
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .sectionTitle {
@@ -294,14 +390,16 @@
 /* =========================== */
 .benefitsSection {
   height: 100vh;
-  min-height: 100vh; /* Garante altura mínima */
+  min-height: 100vh;
   padding: 80px 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box; /* Inclui padding no cálculo da altura */
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .benefitsGrid {
@@ -333,18 +431,12 @@
   transform: scale(1.05);
 }
 
-.comunityAnimation {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 10px;
-}
-
 /* =========================== */
 /* SEÇÃO FAQ */
 /* =========================== */
 .faqSection {
   height: 100vh;
-  min-height: 100vh; /* Garante altura mínima */
+  min-height: 100vh;
   padding: 80px 15%;
   margin: 0 auto;
   background-color: #4a64b8;
@@ -352,7 +444,9 @@
   flex-direction: column;
   justify-content: center;
   overflow-y: auto;
-  box-sizing: border-box; /* Inclui padding no cálculo da altura */
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .faqSection .sectionTitle {
@@ -410,24 +504,45 @@
 /* RESPONSIVIDADE */
 /* =========================== */
 @media (max-width: 1024px) {
-  .containerMap {
+  .containerMapSearch {
     flex-direction: column;
-    min-height: 100vh; /* Garante altura mínima mesmo em mobile */
+    min-height: 100vh;
     padding: 20px 5%;
   }
-  
-  .mapSection,
+
+  .map,
   .animationBox {
+    max-width: 100%;
     height: 400px;
     border-radius: 20px;
   }
-  
+
   .animationBox {
     margin-top: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
   }
-  
+
+  .map {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
   .benefitsGrid {
     gap: 1.5rem;
+  }
+
+  .doctorAnimation {
+    height: 140px;
+  }
+  
+  .comunityAnimation {
+    width: 60px;
+    height: 60px;
   }
 }
 
@@ -441,34 +556,34 @@
     font-size: 1.4rem;
     padding: 0 15px;
   }
-  
+
   .news1 {
     padding: 60px 5% 40px 5%;
-    min-height: 100vh; /* Garante altura mínima em tablets */
+    min-height: 100vh;
   }
-  
+
   .newsContainer {
     flex-direction: column;
     padding: 0 15px;
   }
-  
+
   .newTextBlock {
     max-width: 100%;
   }
-  
+
   .calendarGrid {
     gap: 30px;
     padding: 30px 20px;
   }
-  
+
   .benefitsGrid {
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   .faqSection {
     padding: 60px 10%;
-    min-height: 100vh; /* Garante altura mínima em tablets */
+    min-height: 100vh;
   }
 }
 
@@ -481,22 +596,21 @@
     font-size: 1.2rem;
     padding: 0 10px;
   }
-  
+
   .newTitle {
     font-size: 36px;
   }
-  
+
   .sectionTitle {
     font-size: 28px;
   }
-  
+
   .faqSection .sectionTitle {
     font-size: 36px;
   }
-  
-  /* Garante altura mínima em dispositivos móveis pequenos */
+
   .headerContainer,
-  .containerMap,
+  .containerMapSearch,
   .news1,
   .calendarSection,
   .benefitsSection,
