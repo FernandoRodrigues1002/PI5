@@ -1,12 +1,3 @@
-/* =========================== */
-/* SCROLL SNAP CONTAINER */
-/* =========================== */
-.scrollContainer {
-  scroll-snap-type: y mandatory;
-  overflow-y: auto;
-  height: 100vh;
-  scroll-behavior: smooth;
-}
 
 /* =========================== */
 /* HEADER - SEÇÃO PRINCIPAL */
@@ -95,19 +86,36 @@
   min-height: 100vh;
   background-color: #5a6499;
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* empilha título e conteúdo */
   align-items: center;
+  justify-content: flex-start;
   width: 100%;
-  padding: 0 10%;
+  padding: 30px 10% 0 10%;
   box-sizing: border-box;
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
 
+.titleMapSearch {
+  text-align: center;
+  width: 100%;
+  padding-top: 30px;
+  color: white;
+  font-size: 2rem;
+}
+
+.mapAnimationWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
 .map {
   flex: 3;
   max-width: 75%;
-  height: 50vh;
+  height: 70vh;
   position: relative;
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
@@ -117,7 +125,6 @@
 .animationBox {
   flex: 1;
   max-width: 25%;
-  height: 50vh;
   padding: 20px;
   background-color: #1e40af;
   display: flex;
@@ -127,78 +134,7 @@
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   box-sizing: border-box;
-}
-
-/* =========================== */
-/* ANIMAÇÕES - CONFIGURAÇÕES LIMPAS */
-/* =========================== */
-.doctorAnimation {
-  width: 100%;
-  height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.doctorAnimation > div {
-  width: 100%;
-  height: 100%;
-}
-
-.comunityAnimation {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.comunityAnimation > div {
-  width: 100%;
-  height: 100%;
-}
-
-/* Placeholder para animações carregando */
-.animationPlaceholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  color: white;
-  font-size: 0.8rem;
-  text-align: center;
-  position: relative;
-}
-
-/* Loading dot animation */
-.loadingDot {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.3);
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.8);
-    opacity: 0.5;
-  }
+  height: 70vh;
 }
 
 .animationText {
@@ -218,7 +154,7 @@
   padding: 0.8em 2.5em 0.8em 0.8em;
   height: 30px;
   outline: none;
-  border: 2px solid rgb(141, 109, 255);
+  border: 2px solid white;
   background-color: transparent;
   border-radius: 20px;
   width: 100%;
@@ -238,7 +174,7 @@
 }
 
 .pesquisa label {
-  font-size: 100%;
+  font-size: 0.8rem;
   position: absolute;
   left: 0;
   top: 50%;
@@ -255,7 +191,7 @@
   transform: translateY(-130%) scale(0.85);
   margin-left: 1.2em;
   padding: 0 0.3em;
-  background-color: black;
+  background-color: #1e40af;
   border-radius: 4px;
 }
 
@@ -278,64 +214,56 @@
 /* =========================== */
 /* SEÇÃO INFORMATIVA */
 /* =========================== */
-.news1 {
-  width: 100%;
-  height: 100vh;
+.news {
   position: relative;
-  padding: 80px 10% 40px 10%;
-  background-color: #4a64b8;
-  background-image: url("/images/aplicando.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  box-sizing: border-box;
+  justify-content: left;
+  align-items: center;
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
 
-.newTitle {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 40px;
-  color: #fff;
-  font-size: 48px;
-  text-align: center;
-}
-
-.newsContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 0 30px;
-}
-
-.newTextBlock {
-  flex: 1;
-  max-width: 45%;
+.newsContent {
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 900px;
+}
+
+.newTitle h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  background-color: rgba(30, 64, 175, 0.9);
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: white;
+  text-align: left;
+  width: 100%;
 }
 
 .newText {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
+  background-color: red;
 }
 
 .textBox {
-  background-color: #1e40af;
-  border-radius: 16px;
+  background-color: rgba(30, 64, 175, 0.9);
+  border-radius: 12px;
   padding: 16px;
-  color: #fff;
-  text-align: justify;
-  font-size: 0.5rem;
+  color: white;
+  font-size: 1rem;
   line-height: 1.6;
+  text-align: justify;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -347,7 +275,6 @@
   min-height: 100vh;
   padding: 80px 20px;
   text-align: center;
-  background-image: url("/images/calendario.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -437,7 +364,7 @@
 .faqSection {
   height: 100vh;
   min-height: 100vh;
-  padding: 80px 15%;
+  padding: 0px 15%;
   margin: 0 auto;
   background-color: #4a64b8;
   display: flex;
@@ -616,5 +543,76 @@
   .benefitsSection,
   .faqSection {
     min-height: 100vh;
+  }
+}
+
+/* =========================== */
+/* ANIMAÇÕES - CONFIGURAÇÕES LIMPAS */
+/* =========================== */
+.doctorAnimation {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.doctorAnimation > div {
+  width: 100%;
+  height: 100%;
+}
+
+.comunityAnimation {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.comunityAnimation > div {
+  width: 100%;
+  height: 100%;
+}
+
+.animationPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: white;
+  font-size: 0.8rem;
+  text-align: center;
+  position: relative;
+}
+
+/* Loading dot animation */
+.loadingDot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.5;
   }
 }

@@ -5,10 +5,12 @@ import Image from "next/image";
 import styles from "./home.module.css";
 
 import Card from "./components/cards/card";
-import ScrollSnapSection from "./components/section/ScrollSnapSection";
 
 import Lottie from "lottie-react";
 import "leaflet/dist/leaflet.css";
+
+import SmoothScrollContainer from "./components/scroll/SmoothScrollContainer";
+import AnimatedSection from "./components/scroll/AnimatedSection";
 
 export default function Home() {
   const faqSections = [
@@ -67,7 +69,7 @@ export default function Home() {
             fetch("/animation/AnimationProtected.json"),
             fetch("/animation/AnimationSla.json"),
           ]);
-        
+
         const [doctor, community, protectedAnim, sla] = await Promise.all([
           doctorRes.json(),
           comunityRes.json(),
@@ -90,7 +92,7 @@ export default function Home() {
 
   useEffect(() => {
     const fallbackImage = document.getElementById("fallback-image");
-    const mapElement = document.getElementById("map");
+    const mapElement = document.getElementById("leaflet-map"); // Mudança aqui: ID específico para o mapa
 
     if (typeof window !== "undefined" && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -145,30 +147,44 @@ export default function Home() {
   }, []);
 
   return (
-    <main className={styles.scrollContainer}>
+    <SmoothScrollContainer totalSections={6}>
+      {" "}
       {/* Seção Header */}
-      <ScrollSnapSection>
-        <header className={styles.headerContainer}>
-          <Image
-            src="/images/background.jpg"
-            alt="Background"
-            fill
-            className={styles.headerBackgroundImage}
-            priority
-          />
-          <h1 className={styles.tileHeader}>Proteja Sua Saúde</h1>
-          <p className={styles.descriptionHeader}>
-            Vacinas são essenciais para prevenir doenças e proteger a saúde de
-            todos. Descubra onde se vacinar e manter-se saudável.
-          </p>
-        </header>
-      </ScrollSnapSection>
+      <AnimatedSection id="header" className={styles.headerContainer}>
+        <Image
+          src="/images/background.jpg"
+          alt="Background"
+          fill
+          className={styles.headerBackgroundImage}
+          priority
+        />
+        <h1 className={styles.tileHeader}>Proteja Sua Saúde</h1>
+        <p className={styles.descriptionHeader}>
+          Vacinas são essenciais para prevenir doenças e proteger a saúde de
+          todos. Descubra onde se vacinar e manter-se saudável.
+        </p>
+      </AnimatedSection>
 
       {/* Seção Mapa */}
-      <ScrollSnapSection>
-        <section className={styles.containerMapSearch}>
+      <AnimatedSection id="map-section" className={styles.containerMapSearch}>
+        <div className={styles.titleMapSearch}>
+          <h2>ENCONTRE SUA VACINA!</h2>
+        </div>
+
+        <div className={styles.mapAnimationWrapper}>
           <div className={styles.map}>
-            <div id="map" style={{ width: "100%", height: "100%" }}></div>
+            {/* Elemento do mapa Leaflet com ID específico */}
+            <div
+              id="leaflet-map"
+              style={{
+                width: "100%",
+                height: "100%",
+                minHeight: "400px",
+                borderRadius: "8px",
+              }}
+            />
+
+            {/* Imagem de fallback */}
             <Image
               id="fallback-image"
               src="/images/map-fallback.png"
@@ -180,6 +196,7 @@ export default function Home() {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
+                borderRadius: "8px",
               }}
             />
           </div>
@@ -187,195 +204,180 @@ export default function Home() {
           <div className={styles.animationBox}>
             <div className={styles.doctorAnimation}>
               {animationsLoaded && doctorAnim ? (
-                <Lottie 
-                  animationData={doctorAnim} 
+                <Lottie
+                  animationData={doctorAnim}
                   loop={true}
-                  style={{ width: '100%', height: '100%' }}
+                  style={{ width: "100%", height: "100%" }}
                 />
               ) : (
-                <div className={styles.animationPlaceholder}>
-                  Carregando...
-                </div>
+                <div className={styles.animationPlaceholder}>Carregando...</div>
               )}
             </div>
 
-            <div className={styles.textInputColumn}>
-              <p className={styles.animationText}>ENCONTRE SUA VACINA!</p>
-
-              <div className={styles.pesquisa}>
-                <input type="number" autoComplete="off" id="cep" required />
-                <label htmlFor="cep">Digite seu CEP</label>
-                <button type="button">
-                  <Image
-                    src="/svgs/lupa.svg"
-                    alt="Buscar"
-                    width={16}
-                    height={16}
-                  />
-                </button>
-              </div>
+            <div className={styles.pesquisa}>
+              <input type="number" autoComplete="off" id="cep" required />
+              <label htmlFor="cep">Digite seu CEP</label>
+              <button type="button">
+                <Image
+                  src="/svgs/lupa.svg"
+                  alt="Buscar"
+                  width={16}
+                  height={16}
+                />
+              </button>
             </div>
           </div>
-        </section>
-      </ScrollSnapSection>
+        </div>
+      </AnimatedSection>
 
       {/* Seção Informativa */}
-      <ScrollSnapSection>
-        <section className={styles.news1}>
+      <AnimatedSection id="news" className={styles.news}>
+        <Image
+          src="/images/aplicando.jpg"
+          alt="Background"
+          fill
+          style={{ objectFit: "cover", zIndex: -1 }}
+          priority
+        />
+
+        <div className={styles.newsContent}>
           <div className={styles.newTitle}>
             <h2>Como vou encontrar minha Vacina?</h2>
           </div>
 
-          <div className={styles.newsContainer}>
-            <div className={styles.newTextBlock}>
-              <div className={styles.newText}>
-                <div className={styles.textBox}>
-                  <p>
-                    Para encontrar sua vacina com o MedLocator, basta permitir
-                    que o site acesse sua localização atual. Em poucos segundos,
-                    mostramos as Unidades Básicas de Saúde (UBSs) mais próximas
-                    de você e indicamos se elas têm a vacina disponível. Assim,
-                    você economiza tempo e evita deslocamentos desnecessários,
-                    indo direto ao local certo.
-                  </p>
-                </div>
-                <div className={styles.textBox}>
-                  <p>
-                    Quer saber onde encontrar a vacina que precisa? É simples!
-                    Digite o nome da vacina no campo de busca do MedLocator e,
-                    automaticamente, nossa plataforma verifica a disponibilidade
-                    nas UBSs próximas ao seu endereço. Você terá informações
-                    atualizadas para planejar sua ida com segurança e
-                    praticidade.
-                  </p>
-                </div>
-                <div className={styles.textBox}>
-                  <p>
-                    Com o MedLocator, localizar sua vacina ficou fácil e rápido.
-                    Basta usar a geolocalização do seu dispositivo ou informar
-                    seu endereço manualmente. Nosso sistema verifica em tempo
-                    real quais unidades de saúde possuem a vacina que você
-                    procura, garantindo que você tenha acesso rápido e seguro à
-                    imunização.
-                  </p>
-                </div>
-              </div>
+          <div className={styles.newText}>
+            <div className={styles.textBox}>
+              <p>
+                Para encontrar sua vacina com o MedLocator, basta permitir que o
+                site acesse sua localização atual. Em poucos segundos, mostramos
+                as Unidades Básicas de Saúde (UBSs) mais próximas de você e
+                indicamos se elas têm a vacina disponível.
+              </p>
+            </div>
+            <div className={styles.textBox}>
+              <p>
+                Quer saber onde encontrar a vacina que precisa? É simples!
+                Digite o nome da vacina no campo de busca do MedLocator e,
+                automaticamente, nossa plataforma verifica a disponibilidade nas
+                UBSs próximas ao seu endereço.
+              </p>
+            </div>
+            <div className={styles.textBox}>
+              <p>
+                Com o MedLocator, localizar sua vacina ficou fácil e rápido.
+                Basta usar a geolocalização do seu dispositivo ou informar seu
+                endereço manualmente.
+              </p>
             </div>
           </div>
-        </section>
-      </ScrollSnapSection>
+        </div>
+      </AnimatedSection>
 
       {/* Seção Calendário */}
-      <ScrollSnapSection>
-        <section className={styles.calendarSection}>
-          <h2 className={styles.sectionTitle}>Calendário de Vacinação</h2>
-          <p className={styles.sectionDescription}>
-            Confira as vacinas recomendadas por faixa etária e grupos
-            prioritários.
-          </p>
+      <AnimatedSection id="calendar" className={styles.calendarSection}>
+        <h2 className={styles.sectionTitle}>Calendário de Vacinação</h2>
+        <p className={styles.sectionDescription}>
+          Confira as vacinas recomendadas por faixa etária e grupos
+          prioritários.
+        </p>
 
-          <div className={styles.calendarGrid}>
-            <Card title="Criança" href="./pages/crianca" />
-            <Card title="Jovem e Adolescente" href="./pages/jovem" />
-            <Card title="Adulto" href="./pages/adulto" />
-            <Card title="Gestante" href="./pages/gestante" />
-            <Card title="Idoso" href="./pages/idoso" />
-          </div>
-        </section>
-      </ScrollSnapSection>
+        <div className={styles.calendarGrid}>
+          <Card title="Criança" href="./pages/crianca" />
+          <Card title="Jovem e Adolescente" href="./pages/jovem" />
+          <Card title="Adulto" href="./pages/adulto" />
+          <Card title="Gestante" href="./pages/gestante" />
+          <Card title="Idoso" href="./pages/idoso" />
+        </div>
+      </AnimatedSection>
 
       {/* Seção Benefícios */}
-      <ScrollSnapSection>
-        <section className={styles.benefitsSection}>
-          <h2 className={styles.sectionTitle}>Por que se vacinar?</h2>
-          <div className={styles.benefitsGrid}>
-            <div className={styles.benefitItem}>
-              <div className={styles.comunityAnimation}>
-                {animationsLoaded && protectedAnim ? (
-                  <Lottie 
-                    animationData={protectedAnim} 
-                    loop={true}
-                    style={{ width: '100%', height: '100%' }}
-                  />
-                ) : (
-                  <div className={styles.animationPlaceholder}>
-                    <div className={styles.loadingDot}></div>
-                  </div>
-                )}
-              </div>
-              <p>Previne doenças graves</p>
+      <AnimatedSection id="benefit" className={styles.benefitsSection}>
+        <h2 className={styles.sectionTitle}>Por que se vacinar?</h2>
+        <div className={styles.benefitsGrid}>
+          <div className={styles.benefitItem}>
+            <div className={styles.comunityAnimation}>
+              {animationsLoaded && protectedAnim ? (
+                <Lottie
+                  animationData={protectedAnim}
+                  loop={true}
+                  style={{ width: "100%", height: "100%" }}
+                />
+              ) : (
+                <div className={styles.animationPlaceholder}>
+                  <div className={styles.loadingDot}></div>
+                </div>
+              )}
             </div>
-            <div className={styles.benefitItem}>
-              <div className={styles.comunityAnimation}>
-                {animationsLoaded && slaAnim ? (
-                  <Lottie 
-                    animationData={slaAnim} 
-                    loop={true}
-                    style={{ width: '100%', height: '100%' }}
-                  />
-                ) : (
-                  <div className={styles.animationPlaceholder}>
-                    <div className={styles.loadingDot}></div>
-                  </div>
-                )}
-              </div>
-              <p>Protege a comunidade</p>
+            <p>Previne doenças graves</p>
+          </div>
+          <div className={styles.benefitItem}>
+            <div className={styles.comunityAnimation}>
+              {animationsLoaded && slaAnim ? (
+                <Lottie
+                  animationData={slaAnim}
+                  loop={true}
+                  style={{ width: "100%", height: "100%" }}
+                />
+              ) : (
+                <div className={styles.animationPlaceholder}>
+                  <div className={styles.loadingDot}></div>
+                </div>
+              )}
             </div>
-            <div className={styles.benefitItem}>
-              <div className={styles.comunityAnimation}>
-                {animationsLoaded && comunityAnim ? (
-                  <Lottie 
-                    animationData={comunityAnim} 
-                    loop={true}
-                    style={{ width: '100%', height: '100%' }}
-                  />
-                ) : (
-                  <div className={styles.animationPlaceholder}>
-                    <div className={styles.loadingDot}></div>
+            <p>Protege a comunidade</p>
+          </div>
+          <div className={styles.benefitItem}>
+            <div className={styles.comunityAnimation}>
+              {animationsLoaded && comunityAnim ? (
+                <Lottie
+                  animationData={comunityAnim}
+                  loop={true}
+                  style={{ width: "100%", height: "100%" }}
+                />
+              ) : (
+                <div className={styles.animationPlaceholder}>
+                  <div className={styles.loadingDot}></div>
+                </div>
+              )}
+            </div>
+            <p>Ajuda a controlar surtos</p>
+          </div>
+        </div>
+      </AnimatedSection>
+      
+      {/* Seção FAQ */}
+      <AnimatedSection id="faq" className={styles.faqSection}>
+        <h2 className={styles.sectionTitle}>Perguntas Frequentes (FAQ)</h2>
+
+        {faqSections.map((section, sectionIndex) => (
+          <div key={sectionIndex} className={styles.faqSectionBlock}>
+            <h3 className={styles.faqSectionTitle}>{section.title}</h3>
+
+            <div className={styles.faqContainer}>
+              {section.faqs.map((faq, faqIndex) => {
+                const index = `${sectionIndex}-${faqIndex}`;
+                return (
+                  <div key={index} className={styles.faqItem}>
+                    <h4
+                      onClick={() => toggleFAQ(index)}
+                      className={styles.faqQuestion}
+                    >
+                      {faq.question}
+                      <span className={styles.arrow}>
+                        {activeIndex === index ? "▲" : "▼"}
+                      </span>
+                    </h4>
+
+                    {activeIndex === index && (
+                      <p className={styles.faqAnswer}>{faq.answer}</p>
+                    )}
                   </div>
-                )}
-              </div>
-              <p>Ajuda a controlar surtos</p>
+                );
+              })}
             </div>
           </div>
-        </section>
-      </ScrollSnapSection>
-
-      {/* Seção FAQ */}
-      <ScrollSnapSection>
-        <section className={styles.faqSection}>
-          <h2 className={styles.sectionTitle}>Perguntas Frequentes (FAQ)</h2>
-
-          {faqSections.map((section, sectionIndex) => (
-            <div key={sectionIndex} className={styles.faqSectionBlock}>
-              <h3 className={styles.faqSectionTitle}>{section.title}</h3>
-
-              <div className={styles.faqContainer}>
-                {section.faqs.map((faq, faqIndex) => {
-                  const index = `${sectionIndex}-${faqIndex}`;
-                  return (
-                    <div key={index} className={styles.faqItem}>
-                      <h4
-                        onClick={() => toggleFAQ(index)}
-                        className={styles.faqQuestion}
-                      >
-                        {faq.question}
-                        <span className={styles.arrow}>
-                          {activeIndex === index ? "▲" : "▼"}
-                        </span>
-                      </h4>
-
-                      {activeIndex === index && (
-                        <p className={styles.faqAnswer}>{faq.answer}</p>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </section>
-      </ScrollSnapSection>
-    </main>
+        ))}
+      </AnimatedSection>
+    </SmoothScrollContainer>
   );
 }
