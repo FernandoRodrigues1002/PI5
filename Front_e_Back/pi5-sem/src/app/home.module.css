@@ -1,18 +1,25 @@
+/* Base para todas as seções */
+.sections {
+  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
 
 /* =========================== */
 /* HEADER - SEÇÃO PRINCIPAL */
 /* =========================== */
 .headerContainer {
   height: 100vh;
-  min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
   overflow: hidden;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  padding-top: 60px; /* Espaço para navbar */
+  box-sizing: border-box;
 }
 
 .headerBackgroundImage {
@@ -83,17 +90,14 @@
 /* =========================== */
 .containerMapSearch {
   height: 100vh;
-  min-height: 100vh;
+  width: 100%;
   background-color: #5a6499;
   display: flex;
-  flex-direction: column; /* empilha título e conteúdo */
+  flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 100%;
-  padding: 30px 10% 0 10%;
+  padding: 60px 10% 30px 10%; /* Top padding para navbar */
   box-sizing: border-box;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .titleMapSearch {
@@ -102,20 +106,23 @@
   padding-top: 30px;
   color: white;
   font-size: 2rem;
+  margin-bottom: 20px;
 }
 
 .mapAnimationWrapper {
   display: flex;
   width: 100%;
+  max-width: 1200px;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  flex: 1;
+  min-height: 0;
 }
 
 .map {
   flex: 3;
   max-width: 75%;
-  height: 70vh;
+  height: 60vh;
   position: relative;
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
@@ -134,7 +141,7 @@
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   box-sizing: border-box;
-  height: 70vh;
+  height: 60vh;
 }
 
 .animationText {
@@ -220,10 +227,10 @@
   width: 100%;
   overflow: hidden;
   display: flex;
-  justify-content: left;
+  justify-content: flex-start;
   align-items: center;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  padding: 60px 5% 0 5%; /* Top padding para navbar */
+  box-sizing: border-box;
 }
 
 .newsContent {
@@ -235,17 +242,19 @@
   box-sizing: border-box;
   width: 100%;
   max-width: 900px;
+  margin-left: 5%;
 }
 
 .newTitle h2 {
   font-size: 2.5rem;
   margin-bottom: 2rem;
   background-color: rgba(30, 64, 175, 0.9);
-  padding: 10px 20px;
+  padding: 20px 30px;
   border-radius: 12px;
   color: white;
   text-align: left;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .newText {
@@ -253,18 +262,19 @@
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  background-color: red;
 }
 
 .textBox {
   background-color: rgba(30, 64, 175, 0.9);
   border-radius: 12px;
-  padding: 16px;
+  padding: 20px;
   color: white;
   font-size: 1rem;
   line-height: 1.6;
   text-align: justify;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* =========================== */
@@ -272,8 +282,8 @@
 /* =========================== */
 .calendarSection {
   height: 100vh;
-  min-height: 100vh;
-  padding: 80px 20px;
+  width: 100%;
+  padding: 60px 20px 40px 20px; /* Top padding para navbar */
   text-align: center;
   background-size: cover;
   background-position: center;
@@ -283,20 +293,21 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .sectionTitle {
   color: black;
   font-size: 36px;
   margin-bottom: 40px;
+  width: 100%;
 }
 
 .sectionDescription {
   color: black;
   font-size: 18px;
   margin-bottom: 40px;
+  width: 100%;
+  max-width: 800px;
 }
 
 .calendarGrid {
@@ -307,9 +318,11 @@
   justify-content: center;
   gap: 50px;
   max-width: 800px;
+  width: 100%;
   margin: 0 auto;
   padding: 40px;
   background-color: #fafbeb;
+  box-sizing: border-box;
 }
 
 /* =========================== */
@@ -317,16 +330,14 @@
 /* =========================== */
 .benefitsSection {
   height: 100vh;
-  min-height: 100vh;
-  padding: 80px 20px;
+  width: 100%;
+  padding: 60px 20px 40px 20px; /* Top padding para navbar */
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .benefitsGrid {
@@ -336,6 +347,8 @@
   gap: 2rem;
   margin-top: 2rem;
   flex-wrap: wrap;
+  width: 100%;
+  max-width: 800px;
 }
 
 .benefitItem {
@@ -352,6 +365,7 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   text-align: center;
   transition: transform 0.3s ease;
+  box-sizing: border-box;
 }
 
 .benefitItem:hover {
@@ -363,27 +377,30 @@
 /* =========================== */
 .faqSection {
   height: 100vh;
-  min-height: 100vh;
-  padding: 0px 15%;
-  margin: 0 auto;
+  width: 100%;
+  padding: 60px 5% 20px 5%; /* Top padding para navbar, menos bottom para o footer */
   background-color: #4a64b8;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   overflow-y: auto;
   box-sizing: border-box;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .faqSection .sectionTitle {
   font-size: 48px;
   margin-bottom: 1.5rem;
   color: #fff;
+  text-align: center;
+  width: 100%;
+  flex-shrink: 0;
 }
 
 .faqSectionBlock {
   margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 800px;
 }
 
 .faqSectionTitle {
@@ -394,15 +411,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #fff;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .faqContainer {
   margin-top: 1rem;
   padding-left: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .faqItem {
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .faqQuestion {
@@ -414,12 +437,16 @@
   padding: 0.5rem;
   background: transparent;
   color: #fff;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .faqAnswer {
   margin-top: 0.5rem;
   padding-left: 1rem;
   color: #ccc;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .arrow {
@@ -428,126 +455,7 @@
 }
 
 /* =========================== */
-/* RESPONSIVIDADE */
-/* =========================== */
-@media (max-width: 1024px) {
-  .containerMapSearch {
-    flex-direction: column;
-    min-height: 100vh;
-    padding: 20px 5%;
-  }
-
-  .map,
-  .animationBox {
-    max-width: 100%;
-    height: 400px;
-    border-radius: 20px;
-  }
-
-  .animationBox {
-    margin-top: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-  }
-
-  .map {
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-  }
-
-  .benefitsGrid {
-    gap: 1.5rem;
-  }
-
-  .doctorAnimation {
-    height: 140px;
-  }
-  
-  .comunityAnimation {
-    width: 60px;
-    height: 60px;
-  }
-}
-
-@media (max-width: 768px) {
-  .tileHeader {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .descriptionHeader {
-    font-size: 1.4rem;
-    padding: 0 15px;
-  }
-
-  .news1 {
-    padding: 60px 5% 40px 5%;
-    min-height: 100vh;
-  }
-
-  .newsContainer {
-    flex-direction: column;
-    padding: 0 15px;
-  }
-
-  .newTextBlock {
-    max-width: 100%;
-  }
-
-  .calendarGrid {
-    gap: 30px;
-    padding: 30px 20px;
-  }
-
-  .benefitsGrid {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .faqSection {
-    padding: 60px 10%;
-    min-height: 100vh;
-  }
-}
-
-@media (max-width: 480px) {
-  .tileHeader {
-    font-size: 2.5rem;
-  }
-
-  .descriptionHeader {
-    font-size: 1.2rem;
-    padding: 0 10px;
-  }
-
-  .newTitle {
-    font-size: 36px;
-  }
-
-  .sectionTitle {
-    font-size: 28px;
-  }
-
-  .faqSection .sectionTitle {
-    font-size: 36px;
-  }
-
-  .headerContainer,
-  .containerMapSearch,
-  .news1,
-  .calendarSection,
-  .benefitsSection,
-  .faqSection {
-    min-height: 100vh;
-  }
-}
-
-/* =========================== */
-/* ANIMAÇÕES - CONFIGURAÇÕES LIMPAS */
+/* ANIMAÇÕES */
 /* =========================== */
 .doctorAnimation {
   width: 100%;
@@ -593,7 +501,6 @@
   position: relative;
 }
 
-/* Loading dot animation */
 .loadingDot {
   width: 20px;
   height: 20px;
@@ -614,5 +521,164 @@
   100% {
     transform: scale(0.8);
     opacity: 0.5;
+  }
+}
+
+/* =========================== */
+/* RESPONSIVIDADE */
+/* =========================== */
+@media (max-width: 1200px) {
+  .containerMapSearch {
+    padding: 60px 5% 30px 5%;
+  }
+  
+  .news {
+    padding: 60px 3% 0 3%;
+  }
+  
+  .newsContent {
+    margin-left: 3%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .containerMapSearch {
+    flex-direction: column;
+    padding: 60px 5% 20px 5%;
+  }
+
+  .mapAnimationWrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .map,
+  .animationBox {
+    max-width: 100%;
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+  }
+
+  .animationBox {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+
+  .map {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .benefitsGrid {
+    gap: 1.5rem;
+  }
+
+  .doctorAnimation {
+    height: 140px;
+  }
+  
+  .comunityAnimation {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tileHeader {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .descriptionHeader {
+    font-size: 1.2rem;
+    padding: 0 15px;
+  }
+
+  .newTitle h2 {
+    font-size: 2rem;
+    padding: 15px 20px;
+  }
+
+  .textBox {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+
+  .benefitsGrid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .faqSection {
+    padding: 60px 3% 15px 3%;
+  }
+
+  .faqSection .sectionTitle {
+    font-size: 36px;
+  }
+
+  .calendarSection {
+    padding: 60px 15px 30px 15px;
+  }
+
+  .benefitsSection {
+    padding: 60px 15px 30px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tileHeader {
+    font-size: 2rem;
+  }
+
+  .descriptionHeader {
+    font-size: 1.1rem;
+    padding: 0 10px;
+  }
+
+  .sectionTitle {
+    font-size: 28px;
+  }
+
+  .faqSection .sectionTitle {
+    font-size: 32px;
+  }
+
+  .newTitle h2 {
+    font-size: 1.8rem;
+    padding: 12px 15px;
+  }
+
+  .textBox {
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+
+  .containerMapSearch {
+    padding: 60px 3% 15px 3%;
+  }
+
+  .titleMapSearch {
+    font-size: 1.6rem;
+  }
+
+  .calendarGrid {
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .benefitItem {
+    width: 180px;
+    height: 180px;
+  }
+
+  /* Garantir que todas as seções mantenham altura mínima */
+  .sections {
+    min-height: calc(100vh - 60px);
   }
 }
