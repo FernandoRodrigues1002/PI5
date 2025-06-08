@@ -2,16 +2,37 @@
 
 import React from "react";
 import styles from "./assinatura.module.css";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { FaPills, FaBullhorn, FaBell, FaClipboardCheck } from "react-icons/fa";
 
 export default function Page() {
-  const router = useRouter();
+ 
 
-  const handleSubscribe = () => {
-    // Redireciona para a página de pagamento
-    router.push("/pages/pagamento");
+  const handleSubscribe = async () => {
+    try {
+      // Faz uma requisição para sua API que cria a sessão do Stripe
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao criar sessão de pagamento");
+      }
+
+      const data = await response.json();
+
+      if (data.url) {
+        // Redireciona o usuário para a página de checkout do Stripe
+        window.location.href = data.url;
+      } else {
+        alert("Erro ao obter URL de pagamento");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Ocorreu um erro ao iniciar o pagamento. Tente novamente.");
+    }
   };
 
   return (
@@ -21,6 +42,10 @@ export default function Page() {
       </div>
 
       <h1 className={styles.title}>Assinatura Premium</h1>
+      
+      {/* Novo campo de valor de pagamento */}
+      <p className={styles.paymentAmount}>Por apenas <strong>R$20,00</strong></p>
+      
       <p className={styles.description}>
         Desbloqueie todos os benefícios da nossa plataforma com a assinatura premium!
       </p>
@@ -59,15 +84,9 @@ export default function Page() {
         </div>
       </div>
 
-      
-    <button className={styles.subscribeButton} onClick={handleSubscribe}>
-      Assinar Agora
-    </button>
-    
-
-      <p className={styles.backLink}>
-        <Link href="/">Voltar para a página inicial</Link>
-      </p>
+      <button className={styles.subscribeButton} onClick={handleSubscribe}>
+        Assinar Agora
+      </button>
     </div>
   );
 }
