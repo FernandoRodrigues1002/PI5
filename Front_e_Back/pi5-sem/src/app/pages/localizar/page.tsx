@@ -6,8 +6,13 @@ import styles from "./localizar.module.css";
 
 export default function Localizar() {
   const mapRef = useRef<HTMLDivElement>(null);
+  const mapInitializedRef = useRef(false); 
 
   useEffect(() => {
+    if (mapInitializedRef.current) return; 
+    mapInitializedRef.current = true
+
+
     import("leaflet").then((L) => {
       if (!mapRef.current) return;
 
@@ -16,6 +21,7 @@ export default function Localizar() {
         const existingMap = (mapRef.current as any)._leaflet_map;
         existingMap.remove();
         delete (mapRef.current as any)._leaflet_map;
+        mapRef.current.innerHTML = ""; // <-- Adicionado aqui
       }
 
       // Corrige ícones do Leaflet no Next.js
@@ -70,9 +76,9 @@ export default function Localizar() {
             if (p.lat && p.lon) {
               const marker = L.marker([p.lat, p.lon], { icon: redIcon }).addTo(map);
               marker.bindPopup(
-                `<div class="popup-content">
+                `<div class="popup-content ${styles.popupContentGlobal}">
                   <b>${p.nome}</b><br><br>
-                  <button id="detalhes-${p.lat}-${p.lon}">Ver Detalhes</button>
+                  <button class="popup-content-btn" id="detalhes-${p.lat}-${p.lon}">Ver Detalhes</button>
                 </div>`
               );
               marker.on("popupopen", () => {
@@ -139,3 +145,4 @@ export default function Localizar() {
     </>
   );
 }
+
