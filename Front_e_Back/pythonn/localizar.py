@@ -10,10 +10,10 @@ import random
 app = FastAPI()
 def conectar_mysql():
     return mysql.connector.connect(
-        host="yamabiko.proxy.rlwy.net",
-        port=12819,
+        host="centerbeam.proxy.rlwy.net",
+        port=47834,
         user="root",
-        password="NYnoojOFphBrJpxBLjjcIpFlKeYXYHKJ",
+        password="LeDaSiyWdDlzDkhEhWDNwoDSOwuAudjO",
         database="railway"
     )
 
