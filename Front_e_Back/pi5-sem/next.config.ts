@@ -4,10 +4,14 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/postos_proximos',
-        destination: 'http://localhost:8000/postos_proximos', // Porta correta do FastAPI!
+        source: '/geocode_cep',
+        destination: 'http://localhost:8000/geocode_cep',
       },
-    ];
+      {
+        source: '/postos_proximos',
+        destination: 'http://localhost:8000/postos_proximos',
+      },
+    ]
   },
 };
 

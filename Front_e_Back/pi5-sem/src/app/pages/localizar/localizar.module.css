@@ -8,18 +8,29 @@
 }
 
 .overlay {
-    display: none;
+    display: block;
     position: fixed;
     top: 20px;
     right: 20px;
     width: 300px;
     background: white;
-    border: 2px solid #c00;
+    border: 2px solid rgb(2, 63, 123);
     padding: 16px 24px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     z-index: 1000;
     font-family: sans-serif;
+    color: rgb(0, 0, 0);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(.4,2,.6,1);  
+}
+
+.overlay h3{
+    font-size: 1.2rem;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
 }
   
 .overlay button {
@@ -27,10 +38,15 @@
     margin: 12px auto 0;
     padding: 6px 12px;
     border: none;
-    background: #c00;
+    background: rgb(2, 63, 123);
     color: white;
     border-radius: 6px;
     cursor: pointer;
+}
+
+.overlay li span{
+    font-weight: bold;
+    color: rgb(2, 63, 123);
 }
   
 .popup-content {
@@ -38,13 +54,22 @@
 }
   
 .popupContentGlobal :global(.popup-content-btn) {
-  margin-top: 8px;
+  display: block;
+  margin: 0 auto 0 auto; 
+  align-items: center;
+  justify-content: center;
   padding: 4px 8px;
-  background-color: rgb(0, 123, 255);
+  background-color: rgb(2, 63, 123);
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.popupContentGlobal :global(.popup-content-btn):hover {
+  background-color: #17406a;
+  transform: scale(1.07);
 }
 
 .map {
@@ -56,5 +81,31 @@
   padding-right: 20%;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
 
+.loaderOverlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+}
+
+.loader {
+  border: 6px solid #eee;
+  border-top: 6px solid #17406a;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

@@ -1,6 +1,6 @@
 .container {
   max-width: 900px;
-  margin: 50px auto;
+  margin: 90px auto 50px auto; /* 90px de topo, 50px de baixo */
   padding: 20px 24px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9fafb;

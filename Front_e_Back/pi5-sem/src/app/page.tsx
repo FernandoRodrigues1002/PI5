@@ -220,15 +220,35 @@ export default function Home() {
               </div>
 
               <div className={styles.pesquisa}>
-                <input type="number" autoComplete="off" id="cep" required />
+                <input
+                  type="number"
+                  autoComplete="off"
+                  id="cep"
+                  required
+                  onKeyDown={e => {
+                    if (e.key === "Enter") {
+                      const cep = (e.target as HTMLInputElement).value;
+                      if (cep && cep.length >= 8) {
+                        window.location.href = `/pages/localizar?cep=${cep}`;
+                      } else {
+                        alert("Digite um CEP válido!");
+                      }
+                    }
+                  }}
+                />
                 <label htmlFor="cep">Digite seu CEP</label>
-                <button type="button">
-                  <Image
-                    src="/svgs/lupa.svg"
-                    alt="Buscar"
-                    width={16}
-                    height={16}
-                  />
+                <button
+                  type="button"
+                  onClick={() => {
+                    const cep = (document.getElementById("cep") as HTMLInputElement)?.value;
+                    if (cep && cep.length >= 8) {
+                      window.location.href = `/pages/localizar?cep=${cep}`;
+                    } else {
+                      alert("Digite um CEP válido!");
+                    }
+                  }}
+                >
+                  <Image src="/svgs/lupa.svg" alt="Buscar" width={16} height={16} />
                 </button>
               </div>
             </div>

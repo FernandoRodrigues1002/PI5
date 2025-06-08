@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI, Query
 import requests
 import mysql.connector
 import random
@@ -114,6 +115,36 @@ async def postos(lat: float, lon: float):
     except Exception as e:
         print("Erro:", e)
         return JSONResponse(content={"erro": str(e)}, status_code=500)
+
+@app.get("/geocode_cep")
+def geocode_cep(cep: str):
+    # 1. Busca endereço pelo CEP (ViaCEP)
+    viacep = requests.get(f"https://viacep.com.br/ws/{cep}/json/").json()
+    if "erro" in viacep:
+        return {"erro": "CEP não encontrado"}
+    logradouro = viacep.get("logradouro", "")
+    # bairro = viacep.get("bairro", "")
+    # localidade = viacep.get("localidade", "")
+    # uf = viacep.get("uf", "")
+
+    # 2. Usa Nominatim para geocodificar o endereço com User-Agent
+    endereco = f"{logradouro}" # {bairro}, {localidade}, {uf}, Brasil
+    response = requests.get(
+        "https://nominatim.openstreetmap.org/search",
+        params={"q": endereco, "format": "json"},
+        headers={"User-Agent": "MeuApp/1.0 (meu.email@exemplo.com)"}
+    )
+    try:
+        nominatim = response.json()
+    except Exception:
+        return {"erro": "Resposta inválida do servidor de geocodificação"}
+
+    if not nominatim:
+        return {"erro": "Não foi possível geocodificar o CEP"}
+
+    lat = nominatim[0]["lat"]
+    lon = nominatim[0]["lon"]
+    return {"lat": lat, "lon": lon}
 
 
 

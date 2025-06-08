@@ -1,27 +1,34 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import styles from "./localizar.module.css";
 
 export default function Localizar() {
+  const [loading, setLoading] = useState(false);
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInitializedRef = useRef(false); 
+  const mapInitializedRef = useRef(false);
+
+  // Função para extrair o cep da URL
+  function getCepFromUrl() {
+    if (typeof window === "undefined") return null;
+    const params = new URLSearchParams(window.location.search);
+    return params.get("cep");
+  }
 
   useEffect(() => {
-    if (mapInitializedRef.current) return; 
-    mapInitializedRef.current = true
-
+    if (mapInitializedRef.current) return;
+    mapInitializedRef.current = true;
 
     import("leaflet").then((L) => {
       if (!mapRef.current) return;
 
-      // Se já tiver um mapa, remova antes de criar outro
+      // Remove mapa anterior se já existir
       if ((mapRef.current as any)._leaflet_map) {
         const existingMap = (mapRef.current as any)._leaflet_map;
         existingMap.remove();
         delete (mapRef.current as any)._leaflet_map;
-        mapRef.current.innerHTML = ""; // <-- Adicionado aqui
+        mapRef.current.innerHTML = "";
       }
 
       // Corrige ícones do Leaflet no Next.js
@@ -33,23 +40,9 @@ export default function Localizar() {
         shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
       });
 
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-
+      // Função para inicializar o mapa com lat/lon
+      const initMap = async (lat: number, lon: number) => {
         if (!mapRef.current) return;
-
-        const map = L.map(mapRef.current).setView([lat, lon], 14);
-        (mapRef.current as any)._leaflet_map = map;
-
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          maxZoom: 19,
-        }).addTo(map);
-
-        L.marker([lat, lon])
-          .addTo(map)
-          .bindPopup("Você está aqui")
-          .openPopup();
 
         const redIcon = new L.Icon({
           iconUrl:
@@ -62,19 +55,45 @@ export default function Localizar() {
           shadowSize: [41, 41],
         });
 
+        const blueIcon = new L.Icon({
+          iconUrl:
+            "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png",
+          shadowUrl:
+            "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowSize: [41, 41],
+        });
+
+        const map = L.map(mapRef.current).setView([lat, lon], 14);
+        (mapRef.current as any)._leaflet_map = map;
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+        }).addTo(map);
+
+        // Marcador principal (vermelho)
+        L.marker([lat, lon], { icon: redIcon })
+          .addTo(map)
+          .bindPopup("Você está aqui")
+          .openPopup();
+
+        setLoading(true);
         try {
           const response = await fetch(
             `/postos_proximos?lat=${lat}&lon=${lon}`
           );
           const postos = await response.json();
 
-          if (postos.length === 0) {
+          if (!Array.isArray(postos) || postos.length === 0) {
             alert("Nenhum posto encontrado.");
+            return;
           }
 
           postos.forEach((p: any) => {
             if (p.lat && p.lon) {
-              const marker = L.marker([p.lat, p.lon], { icon: redIcon }).addTo(map);
+              const marker = L.marker([p.lat, p.lon], { icon: blueIcon }).addTo(map);
               marker.bindPopup(
                 `<div class="popup-content ${styles.popupContentGlobal}">
                   <b>${p.nome}</b><br><br>
@@ -97,16 +116,18 @@ export default function Localizar() {
         } catch (error) {
           console.error("Erro ao buscar postos:", error);
           alert("Erro ao buscar postos.");
+        } finally {
+          setLoading(false);
         }
-      });
+      };
 
-      // Funções overlay
+      // Função overlay
       (window as any).mostrarOverlay = (nome: string, medicamentos: any[]) => {
         let content = `<h3>${nome}</h3>`;
         if (medicamentos && medicamentos.length > 0) {
           content += "<ul>";
           medicamentos.forEach((m) => {
-            content += `<li>${m.nome} (${m.quantidade} un.)</li>`;
+            content += `<li>${m.nome} <span class="quantidade">(${m.quantidade} un.)</span></li>`;
           });
           content += "</ul>";
         } else {
@@ -116,27 +137,70 @@ export default function Localizar() {
         const overlay = document.getElementById("overlay");
         if (overlayContent && overlay) {
           overlayContent.innerHTML = content;
-          overlay.style.display = "block";
+          overlay.style.opacity = "1";
+          overlay.style.pointerEvents = "auto";
+          overlay.style.transform = "translateY(0)";
         }
       };
       (window as any).fecharOverlay = () => {
         const overlay = document.getElementById("overlay");
-        if (overlay) overlay.style.display = "none";
+        if (overlay) {
+          overlay.style.opacity = "0";
+          overlay.style.pointerEvents = "none";
+          overlay.style.transform = "translateY(-20px)";
+        }
       };
+
+      // --- Fluxo principal ---
+      const cep = getCepFromUrl();
+      if (cep) {
+        // Busca lat/lon pelo backend usando o CEP
+        setLoading(true);
+        fetch(`/geocode_cep?cep=${cep}`)
+          .then(res => res.json())
+          .then(data => {
+            if (data.lat && data.lon) {
+              initMap(Number(data.lat), Number(data.lon));
+            } else {
+              alert("CEP não encontrado!");
+              setLoading(false);
+            }
+          })
+          .catch(() => {
+            alert("Erro ao buscar localização pelo CEP!");
+            setLoading(false);
+          });
+      } else {
+        // Usa geolocalização do navegador
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          initMap(position.coords.latitude, position.coords.longitude);
+        }, () => {
+          alert("Não foi possível obter sua localização.");
+        });
+      }
     });
   }, []);
 
   return (
     <>
+      <Head>
+        <title>Mapa de Postos</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/leaflet/dist/leaflet.css"
+        />
+      </Head>
       <div className={styles.container}>
-          <title>Mapa de Postos</title>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <link
-            rel="stylesheet"
-            href="https://unpkg.com/leaflet/dist/leaflet.css"
-          />
-      <div id="map" ref={mapRef} className={styles.map}></div>
+        <div id="map" ref={mapRef} className={styles.map}>
+          {loading && (
+            <div className={styles.loaderOverlay}>
+              <div className={styles.loader}></div>
+              <span>Carregando UBS próximas...</span>
+            </div>
+          )}
+        </div>
       </div>
       <div id="overlay" className={styles.overlay}>
         <span id="overlay-content"></span>
@@ -145,4 +209,3 @@ export default function Localizar() {
     </>
   );
 }
-
