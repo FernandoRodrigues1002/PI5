@@ -183,15 +183,13 @@ export default function Localizar() {
 
   return (
     <>
-      <Head>
-        <title>Mapa de Postos</title>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/leaflet/dist/leaflet.css"
-        />
-      </Head>
+      <title>Mapa de Postos</title>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet/dist/leaflet.css"
+      />
       <div className={styles.container}>
         <div id="map" ref={mapRef} className={styles.map}>
           {loading && (
