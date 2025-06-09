@@ -11,12 +11,11 @@ import "leaflet/dist/leaflet.css";
 
 import SmoothScrollContainer from "./components/scroll/SmoothScrollContainer";
 import AnimatedSection from "./components/scroll/AnimatedSection";
-import Footer from "./components/footer/Footer";
+//import Footer from "./components/footer/Footer";
 
 export default function Home() {
   const faqSections = [
     {
-      title: "Vacinas",
       faqs: [
         {
           question: "O que são as vacinas?",
@@ -28,15 +27,30 @@ export default function Home() {
           answer:
             "As vacinas ajudam o sistema de defesa da pessoa a combater infecções de maneira mais eficiente...",
         },
-      ],
-    },
-    {
-      title: "Agendamento",
-      faqs: [
         {
           question: "Como agendar a vacinação?",
           answer:
             "Você pode agendar a vacinação diretamente pelo site ou aplicativo MedLocator...",
+        },
+        {
+          question: "Posso cancelar meu agendamento?",
+          answer:
+            "Sim, o cancelamento pode ser feito até 24 horas antes da data marcada.",
+        },
+        {
+          question: "Posso cancelar meu agendamento?",
+          answer:
+            "Sim, o cancelamento pode ser feito até 24 horas antes da data marcada.",
+        },
+        {
+          question: "Posso cancelar meu agendamento?",
+          answer:
+            "Sim, o cancelamento pode ser feito até 24 horas antes da data marcada.",
+        },
+        {
+          question: "Posso cancelar meu agendamento?",
+          answer:
+            "Sim, o cancelamento pode ser feito até 24 horas antes da data marcada.",
         },
         {
           question: "Posso cancelar meu agendamento?",
@@ -382,8 +396,6 @@ export default function Home() {
 
           {faqSections.map((section, sectionIndex) => (
             <div key={sectionIndex} className={styles.faqSectionBlock}>
-              <h3 className={styles.faqSectionTitle}>{section.title}</h3>
-
               <div className={styles.faqContainer}>
                 {section.faqs.map((faq, faqIndex) => {
                   const index = `${sectionIndex}-${faqIndex}`;
@@ -395,7 +407,7 @@ export default function Home() {
                       >
                         {faq.question}
                         <span className={styles.arrow}>
-                          {activeIndex === index ? "▲" : "▼"}
+                          {activeIndex === index ? "-" : "+"}
                         </span>
                       </h4>
 
@@ -408,7 +420,6 @@ export default function Home() {
               </div>
             </div>
           ))}
-          <Footer />
         </section>
       </AnimatedSection>
     </SmoothScrollContainer>
