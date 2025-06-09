@@ -4,7 +4,12 @@
   min-height: 100vh;
   box-sizing: border-box;
 }
-
+/* Seção FAQ - permite altura automática para conteúdo extra */
+.sections:last-child {
+  min-height: 100vh;
+  height: auto; /* Permite expandir além de 100vh */
+  scroll-snap-align: start;
+}
 /* =========================== */
 /* HEADER - SEÇÃO PRINCIPAL */
 /* =========================== */
@@ -375,9 +380,12 @@
 /* SEÇÃO FAQ */
 /* =========================== */
 .faqSection {
-  padding: 4rem 2rem;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   min-height: 100vh;
+  width: 100%;
+  padding-top: 4rem;
 }
 
 .sectionTitle {
