@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Head from "next/head";
+
 import styles from "./localizar.module.css";
+import Footer from "../../components/footer/Footer";
 
 import Footer from "../../components/footer/Footer";
 
@@ -207,7 +208,8 @@ export default function Localizar() {
         <button onClick={() => (window as any).fecharOverlay()}>Fechar</button>
       <Footer />
       </div>
-
+      <Footer />
     </>
   );
+
 }

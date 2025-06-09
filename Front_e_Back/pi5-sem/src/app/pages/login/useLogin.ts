@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { authService } from '../../../services/auth';
+import { useAuth } from '@/app/components/hooks/useAuth';
 
 export const useLogin = () => {
   const router = useRouter();
+  const { setUsuario } = useAuth();
   const [formData, setFormData] = useState({ email: '', senha: '' });
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState('');
@@ -25,11 +27,11 @@ export const useLogin = () => {
       localStorage.setItem('user', JSON.stringify(resultado.user));
       localStorage.setItem('token', resultado.token);
 
-      // ✅ Alerta de sucesso e redirecionamento para a home
+      setUsuario(resultado.user); // atualiza o contexto
+
       alert('Login realizado com sucesso!');
       router.push('/');
     } catch (error) {
-      // ✅ Mensagem visível no formulário
       setErro('Email ou senha incorretos. Tente novamente.');
       console.error('Erro no login:', error);
     } finally {

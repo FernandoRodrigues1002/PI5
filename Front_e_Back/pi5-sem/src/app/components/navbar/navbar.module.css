@@ -92,3 +92,8 @@
 .navLinks :global(a.active){
   color: #2563eb;
 }
+
+.nomeUser {
+  color: #1f2937;
+  padding-right: 1rem;
+}
