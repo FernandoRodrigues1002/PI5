@@ -1,50 +1,51 @@
 .footer {
-    width: 100%;
-    background-color: #fff;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #ccc;
-    font-size: 14px;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 5px 40px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
 }
 
 .footerLeft {
-    flex: 1;
-    text-align: left;
-    color: #333;
+  flex: 1;
+  text-align: left;
+  color: #333;
 }
 
 .footerCenter {
-    flex: 1;
-    text-align: center;
+  flex: 1;
+  text-align: center;
 }
 
 .footerLogo {
-    width: auto;
-    height: 65px;
-    display: block;
-    margin: 0 auto 5px;
+  width: auto;
+  height: 65px;
+  display: block;
+  margin: 0 auto 5px;
 }
 
 .footerBrand {
-    font-weight: bold;
-    color: #1E3A8A;
+  font-weight: bold;
+  color: #1e3a8a;
 }
 
 .footerRight {
-    flex: 1;
-    text-align: right;
+  flex: 1;
+  text-align: right;
 }
 
 .footerRight a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #333;
-    transition: color 0.2s;
+  margin-left: 20px;
+  text-decoration: none;
+  color: #333;
+  transition: color 0.2s;
 }
 
 .footerRight a:hover {
-    color: #4A64B8;
+  color: #4a64b8;
 }

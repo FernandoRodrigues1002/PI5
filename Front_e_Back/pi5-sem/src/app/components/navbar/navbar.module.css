@@ -31,29 +31,64 @@
   flex: 1;
 }
 
-.navLinks a {
-  text-decoration: none;
-  color: #1f2937;
-  font-weight: 500;
-  font-size: 1rem;
-  transition: color 0.2s ease;
-  position: relative;
-}
-
-.navLinks a:first-child {
-  font-weight: 700;
-  color: #2563eb;
-}
-
-.navLinks a:hover, .authLinks:hover {
-  color: #2563eb;
-}
-
 .authLinks {
   display: flex;
   align-items: center;
   margin-right: 4rem;
   font-weight: 700;
-  color: #1f2937;
 }
 
+.navLinks :global(a),
+.authLinks :global(a) {
+  position: relative;
+  text-decoration: none;
+  color: #1f2937;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.authLinks :global(a) {
+  font-weight: 700;
+}
+
+.navLinks :global(a)::after,
+.navLinks :global(a)::before,
+.authLinks :global(a)::after,
+.authLinks :global(a)::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #2563eb;
+  left: 0;
+  transform: scaleX(0);
+  transition: transform 0.4s ease-out;
+}
+
+.navLinks :global(a)::after,
+.authLinks :global(a)::after {
+  bottom: -1px;
+  transform-origin: right;
+}
+
+.navLinks :global(a)::before,
+.authLinks :global(a)::before {
+  transform-origin: left;
+}
+
+.navLinks :global(a:hover),
+.authLinks :global(a:hover) {
+  color: #2563eb;
+}
+
+.navLinks :global(a:hover)::after,
+.navLinks :global(a:hover)::before,
+.authLinks :global(a:hover)::after,
+.authLinks :global(a:hover)::before {
+  transform: scaleX(1);
+}
+
+.navLinks :global(a.active){
+  color: #2563eb;
+}

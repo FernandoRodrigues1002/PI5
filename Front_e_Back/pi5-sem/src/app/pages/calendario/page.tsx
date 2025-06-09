@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './calendario.module.css';
+import Footer from '@/app/components/footer/Footer';
 
 const categorias = [
   { nome: 'Criança', rota: './crianca' },
@@ -22,6 +23,8 @@ export default function VacinaPage() {
           </li>
         ))}
       </ul>
+      <Footer />
     </main>
+
   );
 }

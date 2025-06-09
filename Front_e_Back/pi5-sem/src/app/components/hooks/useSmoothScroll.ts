@@ -8,7 +8,6 @@ export const useSmoothScroll = (totalSections: number) => {
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const wheelTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Função para navegar para uma seção específica com animação suave
   const navigateToSection = useCallback((sectionIndex: number) => {
     const container = containerRef.current;
     if (!container || isScrolling) return;
@@ -16,14 +15,13 @@ export const useSmoothScroll = (totalSections: number) => {
     setIsScrolling(true);
     setCurrentSection(sectionIndex);
 
-    // Animação customizada mais suave
     const targetPosition = sectionIndex * container.clientHeight;
     const startPosition = container.scrollTop;
     const distance = targetPosition - startPosition;
     
     animate(0, 1, {
       duration: 1.2,
-      ease: [0.25, 0.46, 0.45, 0.94], // Curva de easing mais suave
+      ease: [0.25, 0.46, 0.45, 0.94],
       onUpdate: (progress) => {
         const easeProgress = progress < 0.5 
           ? 4 * progress * progress * progress 
@@ -36,7 +34,6 @@ export const useSmoothScroll = (totalSections: number) => {
     });
   }, [isScrolling]);
 
-  // Configuração do scroll com detecção mais suave
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -55,7 +52,7 @@ export const useSmoothScroll = (totalSections: number) => {
       
       wheelTimeoutRef.current = setTimeout(() => {
         const delta = e.deltaY;
-        const threshold = 50; // Sensibilidade do scroll
+        const threshold = 50;
         
         if (Math.abs(delta) > threshold) {
           if (delta > 0 && currentSection < totalSections - 1) {
@@ -99,7 +96,6 @@ export const useSmoothScroll = (totalSections: number) => {
     };
   }, [currentSection, navigateToSection, isScrolling, totalSections]);
 
-  // Controle de scroll com teclado (mais responsivo)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (isScrolling) return;
