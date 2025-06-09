@@ -204,7 +204,10 @@ export default function Localizar() {
         <span id="overlay-content"></span>
         <button onClick={() => (window as any).fecharOverlay()}>Fechar</button>
       </div>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     </>
   );
 

@@ -11,7 +11,7 @@ import "leaflet/dist/leaflet.css";
 
 import SmoothScrollContainer from "./components/scroll/SmoothScrollContainer";
 import AnimatedSection from "./components/scroll/AnimatedSection";
-//import Footer from "./components/footer/Footer";
+import Footer from "./components/footer/Footer";
 
 export default function Home() {
   const faqSections = [
@@ -37,26 +37,7 @@ export default function Home() {
           answer:
             "Sim, o cancelamento pode ser feito até 24 horas antes da data marcada.",
         },
-        {
-          question: "Posso cancelar meu agendamento?",
-          answer:
-            "Sim, o cancelamento pode ser feito até 24 horas antes da data marcada.",
-        },
-        {
-          question: "Posso cancelar meu agendamento?",
-          answer:
-            "Sim, o cancelamento pode ser feito até 24 horas antes da data marcada.",
-        },
-        {
-          question: "Posso cancelar meu agendamento?",
-          answer:
-            "Sim, o cancelamento pode ser feito até 24 horas antes da data marcada.",
-        },
-        {
-          question: "Posso cancelar meu agendamento?",
-          answer:
-            "Sim, o cancelamento pode ser feito até 24 horas antes da data marcada.",
-        },
+        
       ],
     },
   ];
@@ -421,6 +402,7 @@ export default function Home() {
             </div>
           ))}
         </section>
+        <Footer />
       </AnimatedSection>
     </SmoothScrollContainer>
   );

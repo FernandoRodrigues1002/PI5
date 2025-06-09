@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./navbar.module.css";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useAuth } from "../hooks/useAuth";  // ajuste o caminho
+import { useAuth } from "../hooks/useAuth";
 import { FiLogOut } from "react-icons/fi";
 
 export default function Navbar() {
@@ -35,7 +35,7 @@ export default function Navbar() {
       <div className={styles.authLinks}>
         {usuario ? (
           <>
-            <span className={styles.nomeUser}>{usuario.nome}</span>
+            <p>Olá, <span className={styles.nomeUser}> {usuario.nome}</span></p>
             <button
               onClick={logout}
               title="Sair"
