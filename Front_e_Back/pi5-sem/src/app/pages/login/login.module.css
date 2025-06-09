@@ -57,6 +57,11 @@
   margin-bottom: 0.5rem;
 }
 
+.input::placeholder {
+  color: #2563eb;
+  opacity: 1; 
+}
+
 .button {
   width: 100%;
   padding: 0.5rem 1rem;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
+import { authService } from "@/services/auth";
 import styles from "./localizar.module.css";
 
 export default function Localizar() {
@@ -44,6 +44,8 @@ export default function Localizar() {
       const initMap = async (lat: number, lon: number) => {
         if (!mapRef.current) return;
 
+        const user = authService.getCurrentUser?.();
+        const email = user?.email;
         const redIcon = new L.Icon({
           iconUrl:
             "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
@@ -82,7 +84,10 @@ export default function Localizar() {
         setLoading(true);
         try {
           const response = await fetch(
-            `/postos_proximos?lat=${lat}&lon=${lon}`
+            `/postos_proximos?lat=${lat}&lon=${lon}`,
+            {
+              headers: email ? { "x-user-email": email } : {},
+            }
           );
           const postos = await response.json();
 
