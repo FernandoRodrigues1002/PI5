@@ -3,7 +3,8 @@
 import React from "react";
 import styles from "./assinatura.module.css";
 import { FaPills, FaBullhorn, FaBell, FaClipboardCheck } from "react-icons/fa";
-import Footer from "../../components/footer/Footer";
+import Footer from '@/app/components/footer/Footer';
+
 
 export default function Page() {
  
@@ -37,6 +38,7 @@ export default function Page() {
   };
 
   return (
+    <>
     <div className={styles.container}>
       <div className={styles.logoArea}>
         <img src="/images/logoWhite.png" alt="Logo" className={styles.logo} />
@@ -89,6 +91,7 @@ export default function Page() {
         Assinar Agora
       </button>
     </div>
-    
+    <Footer />
+    </>
   );
 }

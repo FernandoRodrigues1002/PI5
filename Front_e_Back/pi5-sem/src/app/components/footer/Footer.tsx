@@ -9,7 +9,7 @@ export default function Footer() {
       <div className={styles.footerLeft}>MedLocator © Direitos Reservados</div>
       <div className={styles.footerCenter}>
         <Image
-          src="/images/logo.png"
+          src="/images/logoWhite.png"
           alt="MedLocator Logo"
           width={100}
           height={100}

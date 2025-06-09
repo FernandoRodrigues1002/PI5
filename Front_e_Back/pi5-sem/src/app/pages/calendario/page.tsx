@@ -12,6 +12,7 @@ const categorias = [
 
 export default function VacinaPage() {
   return (
+    <>
     <main className={styles.container}>
       <h1 className={styles.title}>Calendário de Vacinação 2025</h1>
       <ul className={styles.lista}>
@@ -23,8 +24,9 @@ export default function VacinaPage() {
           </li>
         ))}
       </ul>
-      <Footer />
     </main>
+    <Footer />
+    </>
 
   );
 }
