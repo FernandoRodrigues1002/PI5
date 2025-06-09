@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import styles from "./localizar.module.css";
+import Footer from "../../components/footer/Footer";
 
 export default function Localizar() {
   const [loading, setLoading] = useState(false);
@@ -204,6 +205,8 @@ export default function Localizar() {
         <span id="overlay-content"></span>
         <button onClick={() => (window as any).fecharOverlay()}>Fechar</button>
       </div>
+      <Footer />
     </>
   );
+
 }
