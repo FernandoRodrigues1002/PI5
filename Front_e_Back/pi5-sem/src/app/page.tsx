@@ -12,6 +12,8 @@ import "leaflet/dist/leaflet.css";
 import SmoothScrollContainer from "./components/scroll/SmoothScrollContainer";
 import AnimatedSection from "./components/scroll/AnimatedSection";
 import Footer from "./components/footer/Footer";
+import Card2 from "./components/cards/card2";
+import Card3 from "./components/cards/card3";
 
 export default function Home() {
   const faqSections = [
@@ -36,6 +38,17 @@ export default function Home() {
           question: "Posso cancelar meu agendamento?",
           answer:
             "Sim, o cancelamento pode ser feito até 24 horas antes da data marcada.",
+        },
+        {
+          question: "Benefícios Adicionais",
+          answer: [
+            "Reduz custos médicos a longo prazo",
+            "Melhora a qualidade de vida",
+            "Protege gerações futuras",
+            "Contribui para a erradicação de doenças",
+            "Reduz complicações em grupos de risco",
+            "Fortalece o sistema de saúde pública",
+          ],
         },
       ],
     },
@@ -87,7 +100,7 @@ export default function Home() {
 
   useEffect(() => {
     const fallbackImage = document.getElementById("fallback-image");
-    const mapElement = document.getElementById("leaflet-map"); // Mudança aqui: ID específico para o mapa
+    const mapElement = document.getElementById("leaflet-map");
 
     if (typeof window !== "undefined" && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -144,9 +157,12 @@ export default function Home() {
   return (
     <>
       <SmoothScrollContainer totalSections={6}>
-        {" "}
         {/* Seção Header */}
-        <AnimatedSection id="header" className={styles.sections}>
+        <AnimatedSection
+          id="header"
+          className={styles.sections}
+          sectionIndex={0}
+        >
           <section className={styles.headerContainer}>
             <Image
               src="/images/background.jpg"
@@ -162,16 +178,20 @@ export default function Home() {
             </p>
           </section>
         </AnimatedSection>
+
         {/* Seção Mapa */}
-        <AnimatedSection id="map-section" className={styles.sections}>
+        <AnimatedSection
+          id="map-section"
+          className={styles.sections}
+          sectionIndex={1}
+        >
           <section className={styles.containerMapSearch}>
-            <div className={styles.titleMapSearch}>
+            <div className={styles.sectionTitle}>
               <h2>ENCONTRE SUA VACINA!</h2>
             </div>
 
             <div className={styles.mapAnimationWrapper}>
               <div className={styles.map}>
-                {/* Elemento do mapa Leaflet com ID específico */}
                 <div
                   id="leaflet-map"
                   style={{
@@ -182,7 +202,6 @@ export default function Home() {
                   }}
                 />
 
-                {/* Imagem de fallback */}
                 <Image
                   id="fallback-image"
                   src="/images/map-fallback.png"
@@ -257,24 +276,26 @@ export default function Home() {
             </div>
           </section>
         </AnimatedSection>
+
         {/* Seção Informativa */}
-        <AnimatedSection id="news" className={styles.sections}>
+        <AnimatedSection id="news" className={styles.sections} sectionIndex={2}>
           <section className={styles.news}>
             <Image
               src="/images/aplicando.jpg"
               alt="Background"
               fill
+              className={styles.newsBackgroundImage}
               style={{ objectFit: "cover", zIndex: -1 }}
               priority
             />
 
             <div className={styles.newsContent}>
-              <div className={styles.newTitle}>
+              <div className={styles.sectionTitle}>
                 <h2>Como vou encontrar minha Vacina?</h2>
               </div>
 
-              <div className={styles.newText}>
-                <div className={styles.textBox}>
+              <div className={styles.textBox}>
+                <div className={styles.newText}>
                   <p>
                     Para encontrar sua vacina com o MedLocator, basta permitir
                     que o site acesse sua localização atual. Em poucos segundos,
@@ -282,7 +303,7 @@ export default function Home() {
                     de você e indicamos se elas têm a vacina disponível.
                   </p>
                 </div>
-                <div className={styles.textBox}>
+                <div className={styles.newText}>
                   <p>
                     Quer saber onde encontrar a vacina que precisa? É simples!
                     Digite o nome da vacina no campo de busca do MedLocator e,
@@ -290,7 +311,7 @@ export default function Home() {
                     nas UBSs próximas ao seu endereço.
                   </p>
                 </div>
-                <div className={styles.textBox}>
+                <div className={styles.newText}>
                   <p>
                     Com o MedLocator, localizar sua vacina ficou fácil e rápido.
                     Basta usar a geolocalização do seu dispositivo ou informar
@@ -301,116 +322,151 @@ export default function Home() {
             </div>
           </section>
         </AnimatedSection>
+
         {/* Seção Calendário */}
-        <AnimatedSection id="calendar" className={styles.sections}>
+        <AnimatedSection
+          id="calendar"
+          className={styles.sections}
+          sectionIndex={3}
+        >
           <section className={styles.calendarSection}>
-            <h2 className={styles.sectionTitle}>Calendário de Vacinação</h2>
-            <p className={styles.sectionDescription}>
-              Confira as vacinas recomendadas por faixa etária e grupos
-              prioritários.
-            </p>
+            <div className={styles.sectionTitle}>
+              <h2>Calendário de Vacinação</h2>
+              <p className={styles.sectionDescription}>
+                Confira as vacinas recomendadas por faixa etária e grupos
+                prioritários.
+              </p>
+            </div>
 
             <div className={styles.calendarGrid}>
-              <Card title="Criança" href="./pages/crianca" />
-              <Card title="Jovem e Adolescente" href="./pages/jovem" />
-              <Card title="Adulto" href="./pages/adulto" />
-              <Card title="Gestante" href="./pages/gestante" />
-              <Card title="Idoso" href="./pages/idoso" />
+              <Card
+                title="Criança"
+                subtitle="Vacinas essenciais para proteção desde o nascimento até os 12 anos"
+                href="./pages/crianca"
+              />
+              <Card
+                title="Jovem e Adolescente"
+                subtitle="Imunização importante para a fase de crescimento e desenvolvimento"
+                href="./pages/jovem"
+              />
+              <Card
+                title="Adulto"
+                subtitle="Manutenção da proteção e prevenção de doenças ocupacionais"
+                href="./pages/adulto"
+              />
+              <Card
+                title="Gestante"
+                subtitle="Proteção especial para mãe e bebê durante a gravidez"
+                href="./pages/gestante"
+              />
+              <Card
+                title="Idoso"
+                subtitle="Reforço da imunidade para a terceira idade"
+                href="./pages/idoso"
+              />
+            </div>
+
+            <div className={styles.calendarStats}>
+              <Card2 title="20+" subtitle="Tipos de vacinas disponíveis" />
+              <Card2 title="95%" subtitle="Eficácia média" />
+              <Card2 title="1000+" subtitle="Pessoas protegidas" />
+              <Card2 title="500+" subtitle="Pontos de vacinação" />
             </div>
           </section>
         </AnimatedSection>
+
         {/* Seção Benefícios */}
-        <AnimatedSection id="benefit" className={styles.sections}>
+        <AnimatedSection
+          id="benefit"
+          className={styles.sections}
+          sectionIndex={4}
+        >
           <section className={styles.benefitsSection}>
-            <h2 className={styles.sectionTitle}>Por que se vacinar?</h2>
-            <div className={styles.benefitsGrid}>
+            <div className={styles.sectionTitle}>
+              <h2>Por que se vacinar?</h2>
+              <p className={styles.sectionDescription}>
+                A vacinação é uma das medidas mais eficazes para prevenir
+                doenças e salvar vidas
+              </p>
+            </div>
+
+            <div className={styles.benefitsCards}>
               <div className={styles.benefitItem}>
-                <div className={styles.comunityAnimation}>
-                  {animationsLoaded && protectedAnim ? (
-                    <Lottie
-                      animationData={protectedAnim}
-                      loop={true}
-                      style={{ width: "100%", height: "100%" }}
-                    />
-                  ) : (
-                    <div className={styles.animationPlaceholder}>
-                      <div className={styles.loadingDot}></div>
-                    </div>
-                  )}
-                </div>
-                <p>Previne doenças graves</p>
+                <Card3
+                  title="Previne doenças graves"
+                  subtitle="As vacinas estimulam o sistema imunológico a produzir
+                  anticorpos, criando uma barreira de proteção contra doenças
+                  potencialmente fatais."
+                  animationData={protectedAnim}
+                  animationsLoaded={animationsLoaded}
+                />
               </div>
               <div className={styles.benefitItem}>
-                <div className={styles.comunityAnimation}>
-                  {animationsLoaded && slaAnim ? (
-                    <Lottie
-                      animationData={slaAnim}
-                      loop={true}
-                      style={{ width: "100%", height: "100%" }}
-                    />
-                  ) : (
-                    <div className={styles.animationPlaceholder}>
-                      <div className={styles.loadingDot}></div>
-                    </div>
-                  )}
-                </div>
-                <p>Protege a comunidade</p>
+                <Card3
+                  title="Protege a comunidade"
+                  subtitle="Quando a maioria se vacina, criamos a imunidade coletiva, protegendo também aqueles que não podem se vacinar."
+                  animationData={slaAnim}
+                  animationsLoaded={animationsLoaded}
+                />
               </div>
               <div className={styles.benefitItem}>
-                <div className={styles.comunityAnimation}>
-                  {animationsLoaded && comunityAnim ? (
-                    <Lottie
-                      animationData={comunityAnim}
-                      loop={true}
-                      style={{ width: "100%", height: "100%" }}
-                    />
-                  ) : (
-                    <div className={styles.animationPlaceholder}>
-                      <div className={styles.loadingDot}></div>
-                    </div>
-                  )}
-                </div>
-                <p>Ajuda a controlar surtos</p>
+                <Card3
+                  title="Ajuda a controlar surtos"
+                  subtitle="A vacinação em massa é fundamental para prevenir e controlar
+                  surtos de doenças infecciosas em nossa sociedade."
+                  animationData={comunityAnim}
+                  animationsLoaded={animationsLoaded}
+                />
               </div>
             </div>
           </section>
         </AnimatedSection>
+
         {/* Seção FAQ */}
-        <AnimatedSection id="faq">
+        <AnimatedSection id="faq" sectionIndex={5}>
           <section className={styles.faqSection}>
             <div style={{ flex: 1 }}>
-            <div className={styles.sectionTitle}>
-              <h2>Perguntas Frequentes (FAQ)</h2>
-            </div>
-
-            {faqSections.map((section, sectionIndex) => (
-              <div key={sectionIndex} className={styles.faqSectionBlock}>
-                <div className={styles.faqContainer}>
-                  {section.faqs.map((faq, faqIndex) => {
-                    const index = `${sectionIndex}-${faqIndex}`;
-                    return (
-                      <div key={index} className={styles.faqItem}>
-                        <h4
-                          onClick={() => toggleFAQ(index)}
-                          className={styles.faqQuestion}
-                        >
-                          {faq.question}
-                          <span className={styles.arrow}>
-                            {activeIndex === index ? "-" : "+"}
-                          </span>
-                        </h4>
-
-                        {activeIndex === index && (
-                          <p className={styles.faqAnswer}>{faq.answer}</p>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
+              <div className={styles.sectionTitle}>
+                <h2>Perguntas Frequentes (FAQ)</h2>
               </div>
-            ))}
+
+              {faqSections.map((section, sectionIndex) => (
+                <div key={sectionIndex} className={styles.faqSectionBlock}>
+                  <div className={styles.faqContainer}>
+                    {section.faqs.map((faq, faqIndex) => {
+                      const index = `${sectionIndex}-${faqIndex}`;
+                      return (
+                        <div key={index} className={styles.faqItem}>
+                          <h4
+                            onClick={() => toggleFAQ(index)}
+                            className={styles.faqQuestion}
+                          >
+                            {faq.question}
+                            <span className={styles.arrow}>
+                              {activeIndex === index ? "-" : "+"}
+                            </span>
+                          </h4>
+
+                          {activeIndex === index &&
+                            (Array.isArray(faq.answer) ? (
+                              <ul className={styles.faqAnswerList}>
+                                {faq.answer.map((item, i) => (
+                                  <li key={i} className={styles.faqAnswerItem}>
+                                    {item}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className={styles.faqAnswer}>{faq.answer}</p>
+                            ))}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
-          <Footer />
+            <Footer />
           </section>
         </AnimatedSection>
       </SmoothScrollContainer>

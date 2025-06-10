@@ -2,14 +2,37 @@
   height: 100vh;
   width: 100%;
   min-height: 100vh;
-  box-sizing: border-box;
 }
-/* Seção FAQ - permite altura automática para conteúdo extra */
-.sections:last-child {
-  min-height: 100vh;
-  height: auto; /* Permite expandir além de 100vh */
-  scroll-snap-align: start;
+
+/* =========================== */
+/* TITLES */
+/* =========================== */
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
+
+.sectionTitle h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+}
+
+.sectionTitle h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 2px;
+}
+
 /* =========================== */
 /* HEADER - SEÇÃO PRINCIPAL */
 /* =========================== */
@@ -95,7 +118,6 @@
 .containerMapSearch {
   height: 100vh;
   width: 100%;
-  background-color: #5a6499;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,7 +159,7 @@
   flex: 1;
   max-width: 25%;
   padding: 20px;
-  background-color: #1e40af;
+  background-color: #0070f3;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -226,107 +248,101 @@
 /* SEÇÃO INFORMATIVA */
 /* =========================== */
 .news {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
+  min-height: 100vh;
+  padding-top: 60px;
+  padding-bottom: 40px;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 60px 5% 0 5%; /* Top padding para navbar */
-  box-sizing: border-box;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+
+.newsBackgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
 }
 
 .newsContent {
-  z-index: 1;
+  width: 60%;
+  max-width: 90vw;
+  min-width: 300px;
+  margin-top: 10px;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 900px;
-  margin-left: 5%;
-}
-
-.newTitle h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  background-color: rgba(30, 64, 175, 0.9);
-  padding: 20px 30px;
-  border-radius: 12px;
-  color: white;
-  text-align: left;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.newText {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .textBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: fit-content;
+  max-width: 800px;
+}
+
+.newText {
+  position: relative;
   background-color: rgba(30, 64, 175, 0.9);
   border-radius: 12px;
   padding: 20px;
   color: white;
-  font-size: 1rem;
+  font-size: 0.8rem;
   line-height: 1.6;
-  text-align: justify;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   width: 100%;
-  box-sizing: border-box;
+  min-width: 250px;
+  max-width: 100%;
 }
 
 /* =========================== */
 /* SEÇÃO CALENDÁRIO */
 /* =========================== */
 .calendarSection {
-  height: 100vh;
-  width: 100%;
-  padding: 60px 20px 40px 20px; /* Top padding para navbar */
-  text-align: center;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  box-sizing: border-box;
-}
+  justify-content: flex-start;
+  text-align: center;
 
-.sectionTitle {
-  color: black;
-  font-size: 36px;
-  margin-bottom: 40px;
+  height: 100vh;
   width: 100%;
+  padding-top: 60px;
 }
 
 .sectionDescription {
   color: black;
   font-size: 18px;
-  margin-bottom: 40px;
   width: 100%;
   max-width: 800px;
+  margin-top: 20px;
 }
 
 .calendarGrid {
-  border-radius: 35px;
-  border: black 1px solid;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 50px;
-  max-width: 800px;
+  gap: 40px;
   width: 100%;
-  margin: 0 auto;
-  padding: 40px;
-  background-color: #fafbeb;
+  padding: 20px 20px 40px;
   box-sizing: border-box;
+}
+
+.calendarStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0 20px;
+  width: 100%;
+  max-width: 800px;
+  justify-items: center;
 }
 
 /* =========================== */
@@ -335,7 +351,7 @@
 .benefitsSection {
   height: 100vh;
   width: 100%;
-  padding: 60px 20px 40px 20px; /* Top padding para navbar */
+  padding: 60px 20px 80px 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -344,36 +360,14 @@
   box-sizing: border-box;
 }
 
-.benefitsGrid {
+.benefitsCards {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  margin-top: 2rem;
   flex-wrap: wrap;
   width: 100%;
   max-width: 800px;
-}
-
-.benefitItem {
-  background-color: #1e40af;
-  border-radius: 20px;
-  width: 200px;
-  height: 200px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  transition: transform 0.3s ease;
-  box-sizing: border-box;
-}
-
-.benefitItem:hover {
-  transform: scale(1.05);
 }
 
 /* =========================== */
@@ -386,32 +380,6 @@
   min-height: 100vh;
   width: 100%;
   padding-top: 4rem;
-}
-
-.sectionTitle {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.sectionTitle h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1e293b;
-  margin: 0;
-  position: relative;
-  display: inline-block;
-}
-
-.sectionTitle h2::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-  border-radius: 2px;
 }
 
 .faqSectionBlock {
@@ -428,14 +396,16 @@
 .faqItem {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   transition: all 0.3s ease;
   border: 1px solid #e2e8f0;
 }
 
 .faqItem:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
   transform: translateY(-2px);
 }
 
@@ -460,13 +430,6 @@
   color: #3b82f6;
 }
 
-.arrow {
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  color: #64748b;
-  font-weight: bold;
-}
-
 .faqQuestion:hover .arrow {
   color: #3b82f6;
   transform: scale(1.1);
@@ -481,6 +444,36 @@
   animation: fadeInDown 0.3s ease;
   border-top: 1px solid #f1f5f9;
   background: #fefefe;
+}
+
+.faqAnswerList {
+padding: 0 2rem 1.5rem 2rem;
+  margin: 0;
+  color: #475569;
+  line-height: 1.7;
+  font-size: 1rem;
+  animation: fadeInDown 0.3s ease;
+  border-top: 1px solid #f1f5f9;
+  background: #fefefe;
+  list-style: none;
+}
+
+.faqAnswerItem {
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.faqAnswerItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 6px;
+  height: 6px;
+  background: #667eea;
+  border-radius: 50%;
 }
 
 /* =========================== */
@@ -499,43 +492,6 @@
 .doctorAnimation > div {
   width: 100%;
   height: 100%;
-}
-
-.comunityAnimation {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.comunityAnimation > div {
-  width: 100%;
-  height: 100%;
-}
-
-.animationPlaceholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  color: white;
-  font-size: 0.8rem;
-  text-align: center;
-  position: relative;
-}
-
-.loadingDot {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.3);
-  animation: pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
@@ -706,8 +662,389 @@
     height: 180px;
   }
 
-  /* Garantir que todas as seções mantenham altura mínima */
   .sections {
     min-height: calc(100vh - 60px);
+  }
+}
+/* =========================== */
+/* BREAKPOINTS INTERMEDIÁRIOS */
+/* =========================== */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .headerContainer {
+    padding-top: 80px;
+  }
+  
+  .tileHeader {
+    font-size: 2.8rem;
+  }
+  
+  .descriptionHeader {
+    font-size: 1.25rem;
+    max-width: 750px;
+  }
+  
+  .newsContent {
+    width: 70%;
+    padding: 35px;
+  }
+  
+  .calendarStats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .headerContainer {
+    padding-top: 70px;
+  }
+  
+  .tileHeader {
+    font-size: 2.6rem;
+    margin-bottom: 1.8rem;
+  }
+  
+  .titleMapSearch {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+  }
+  
+  .newsContent {
+    width: 80%;
+    padding: 30px;
+    margin-top: 20px;
+  }
+  
+  .newText {
+    font-size: 0.85rem;
+    padding: 18px;
+  }
+  
+  .benefitsCards {
+    gap: 1.8rem;
+  }
+  
+  .faqQuestion {
+    font-size: 1.05rem;
+    padding: 1.3rem 1.8rem;
+  }
+  
+  .faqAnswer,
+  .faqAnswerList {
+    padding: 0 1.8rem 1.3rem 1.8rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .headerContainer {
+    padding-top: 80px;
+  }
+  
+  .containerMapSearch {
+    padding: 80px 4% 25px 4%;
+  }
+  
+  .mapAnimationWrapper {
+    gap: 25px;
+  }
+  
+  .map,
+  .animationBox {
+    height: 300px;
+    border-radius: 15px;
+  }
+  
+  .animationText {
+    font-size: 0.75rem;
+  }
+  
+  .pesquisa {
+    max-width: 200px;
+  }
+  
+  .newsContent {
+    width: 90%;
+    padding: 25px;
+    border-radius: 25px;
+  }
+  
+  .calendarSection {
+    padding: 80px 20px 40px 20px;
+  }
+  
+  .calendarStats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: 600px;
+  }
+  
+  .benefitsSection {
+    padding: 80px 20px 40px 20px;
+  }
+  
+  .faqSection {
+    padding: 80px 4% 20px 4%;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerContainer {
+    padding-top: 70px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .tileHeader {
+    font-size: 1.8rem;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+  
+  .descriptionHeader {
+    font-size: 1rem;
+    padding: 0 5px;
+    max-width: 95%;
+  }
+  
+  .containerMapSearch {
+    padding: 70px 2% 20px 2%;
+  }
+  
+  .titleMapSearch {
+    font-size: 1.4rem;
+    padding-top: 20px;
+  }
+  
+  .map,
+  .animationBox {
+    height: 250px;
+    border-radius: 12px;
+  }
+  
+  .animationText {
+    font-size: 0.65rem;
+  }
+  
+  .pesquisa {
+    max-width: 170px;
+  }
+  
+  .pesquisa input {
+    padding: 0.7em 2.2em 0.7em 0.7em;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+  
+  .pesquisa label {
+    font-size: 0.75rem;
+  }
+  
+  .news {
+    padding: 70px 2% 0 2%;
+  }
+  
+  .newsContent {
+    width: 96%;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 15px;
+  }
+  
+  .newText {
+    font-size: 0.75rem;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  .calendarSection {
+    padding: 70px 10px 25px 10px;
+  }
+  
+  .sectionTitle h2 {
+    font-size: 2rem;
+  }
+  
+  .sectionDescription {
+    font-size: 16px;
+    padding: 0 10px;
+  }
+  
+  .calendarGrid {
+    gap: 20px;
+    padding: 15px;
+  }
+  
+  .calendarStats {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 10px;
+  }
+  
+  .benefitsSection {
+    padding: 70px 10px 25px 10px;
+  }
+  
+  .benefitsCards {
+    gap: 1.2rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .faqSection {
+    padding: 70px 2% 20px 2%;
+  }
+  
+  .faqQuestion {
+    font-size: 1rem;
+    padding: 1.2rem 1.5rem;
+  }
+  
+  .faqAnswer,
+  .faqAnswerList {
+    padding: 0 1.5rem 1.2rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .faqAnswerItem {
+    padding-left: 1.2rem;
+  }
+  
+  .doctorAnimation {
+    height: 120px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .tileHeader {
+    font-size: 1.6rem;
+  }
+  
+  .descriptionHeader {
+    font-size: 0.95rem;
+  }
+  
+  .titleMapSearch {
+    font-size: 1.3rem;
+  }
+  
+  .sectionTitle h2 {
+    font-size: 1.8rem;
+  }
+  
+  .sectionTitle h2::after {
+    width: 60px;
+    height: 3px;
+  }
+  
+  .newsContent {
+    padding: 18px;
+  }
+  
+  .newText {
+    font-size: 0.7rem;
+    padding: 12px;
+  }
+  
+  .pesquisa {
+    max-width: 160px;
+  }
+  
+  .faqQuestion {
+    padding: 1rem 1.2rem;
+    font-size: 0.95rem;
+  }
+  
+  .faqAnswer,
+  .faqAnswerList {
+    padding: 0 1.2rem 1rem 1.2rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* =========================== */
+/* AJUSTES PARA ORIENTAÇÃO */
+/* =========================== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .headerContainer {
+    height: auto;
+    min-height: 100vh;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  
+  .tileHeader {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .descriptionHeader {
+    font-size: 1rem;
+  }
+  
+  .containerMapSearch {
+    height: auto;
+    min-height: 100vh;
+    padding: 40px 5% 40px 5%;
+  }
+  
+  .map,
+  .animationBox {
+    height: 280px;
+  }
+  
+  .calendarSection,
+  .benefitsSection {
+    height: auto;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  
+  .news {
+    min-height: 100vh;
+    height: auto;
+    padding: 40px 3% 40px 3%;
+  }
+  
+  .faqSection {
+    min-height: 100vh;
+    padding: 40px 3% 40px 3%;
+  }
+}
+
+/* =========================== */
+/* MELHORIAS DE ACESSIBILIDADE */
+/* =========================== */
+@media (prefers-reduced-motion: reduce) {
+  .tileHeader,
+  .descriptionHeader {
+    animation: none;
+  }
+  
+  .faqItem {
+    transition: none;
+  }
+  
+  .faqQuestion:hover {
+    transform: none;
+  }
+  
+  .faqAnswer {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .faqItem {
+    border: 2px solid #000;
+  }
+  
+  .faqQuestion {
+    border-bottom: 1px solid #000;
+  }
+  
+  .newText {
+    background-color: rgba(0, 0, 0, 0.9);
   }
 }

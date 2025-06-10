@@ -7,7 +7,6 @@
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   color: #222;
-  margin-bottom: 275px;
 }
 
 .title {
@@ -59,4 +58,50 @@
 .link:focus {
   color: #3182ce;
   outline: none;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .lista {
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .link {
+    height: 100px;
+    font-size: 1.2rem;
+    padding: 0 16px;
+  }
+
+  .container {
+    margin: 80px 15px 40px 15px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+
+  .lista {
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .link {
+    height: 90px;
+    font-size: 1rem;
+    padding: 0 12px;
+  }
+
+  .container {
+    margin: 70px 10px 30px 10px;
+    padding: 14px;
+  }
 }

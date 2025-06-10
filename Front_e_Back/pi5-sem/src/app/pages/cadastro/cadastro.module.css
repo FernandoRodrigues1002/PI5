@@ -1,15 +1,17 @@
 .medicalBg {
   background-color: #f0f4f8;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px); /* Reduzindo a altura para dar espaço ao footer */
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   color: black;
   background-image: url("/images/login.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  overflow: hidden;
+  /* Removido overflow: hidden para permitir que o footer apareça */
+  padding-top: 80px;
+  padding-bottom: 40px; /* Adicionando padding inferior */
 }
 
 .formContainer {
@@ -19,6 +21,7 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   width: 100%;
   max-width: 500px;
+  margin-bottom: 2rem; /* Espaçamento para o footer */
 }
 
 .formHeader {
