@@ -28,6 +28,7 @@
   height: 60px;
   display: flex;
   align-items: center;
+  color: #000;
 }
 
 .logoMed {
@@ -47,7 +48,8 @@
   justify-content: flex-end;
   align-items: center;
   margin-right: 4rem;
-  font-weight: 700;
+  font-weight: 600;
+  color: #000;
 }
 
 .navLinks :global(a),
@@ -110,6 +112,134 @@
   padding-right: 1rem;
 }
 
+.notificationButton {
+  background: none;
+  border: none;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  color: #1f2937;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.notificacaoDropdown {
+  position: relative;
+  margin-right: 1rem;
+}
+
+.notificacaoIcon {
+  position: relative;
+  cursor: pointer;
+}
+
+.notificacaoBadge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.notificacaoLista {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  min-width: 220px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  z-index: 999;
+  padding: 0.5rem;
+}
+
+.notificacaoItem {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+.notificacaoItem:last-child {
+  border-bottom: none;
+}
+
+.notificacaoVazia {
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.userDropdown {
+  position: relative;
+}
+
+.userIcon {
+  cursor: pointer;
+}
+
+.userDropdownMenu {
+  position: absolute;
+  right: 0;
+  top: 36px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 1rem;
+  min-width: 300px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+.userInfo h4 {
+  margin: 0 0 0.5rem;
+}
+
+.cpfLine {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoutButton {
+  margin-top: 1rem;
+  width: 100%;
+  background: #1f2937;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
 /* =========================== */
 /* MENU MOBILE - HAMBURGER */
 /* =========================== */
@@ -144,7 +274,7 @@
 }
 
 .mobileMenu {
-  display: none;
+  display: block;
   position: fixed;
   top: 60px;
   left: 0;
@@ -152,9 +282,11 @@
   background-color: white;
   border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 998;
+  z-index: 1100; 
   padding: 1rem 0;
 }
+
+
 
 .mobileMenu.active {
   display: block;
@@ -169,6 +301,7 @@
   border-bottom: 1px solid #f0f0f0;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
+  color: #000;
 }
 
 .mobileAuthLinks {
@@ -200,6 +333,13 @@
 .mobileNavLinks :global(a.active) {
   color: #2563eb;
 }
+
+.mobileNavLinks :global(a),
+.mobileAuthLinks :global(a),
+.mobileUserBox p {
+  color: #1f2937; 
+}
+
 
 @keyframes slideDown {
   from {

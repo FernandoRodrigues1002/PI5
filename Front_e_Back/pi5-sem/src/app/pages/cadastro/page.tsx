@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { cadastrarUsuario } from "./useCadstro";
 import Link from "next/link";
 import Footer from "../../components/footer/Footer";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import ModalMessage from "../../components/modal/ModalMessage";
 
 export default function Page() {
   const router = useRouter();
@@ -22,6 +24,13 @@ export default function Page() {
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false);
+  const [modalInfo, setModalInfo] = useState({
+    show: false,
+    success: false,
+    message: "",
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -81,34 +90,31 @@ export default function Page() {
           endereco: formData.endereco,
           cep_usuario: formData.cep_usuario,
         });
-        if (window.confirm("Cadastro realizado com sucesso!")) {
-          router.push("/");
-        }
+        setModalInfo({
+          show: true,
+          success: true,
+          message: "Cadastro realizado com sucesso!",
+        });
+        setTimeout(() => router.push("/"), 2000);
       } catch (error: unknown) {
-        if (error instanceof Error) {
-          window.alert("Erro ao cadastrar: " + error.message);
-        } else {
-          window.alert("Erro ao cadastrar.");
-        }
+        setModalInfo({
+          show: true,
+          success: false,
+          message:
+            error instanceof Error
+              ? "Erro ao cadastrar: " + error.message
+              : "Erro ao cadastrar.",
+        });
       }
     }
   };
 
   const progressPercent = (step / 3) * 100;
 
-  // Removido o useEffect que estava bloqueando o scroll
-  // useEffect(() => {
-  //   document.body.style.overflow = "hidden";
-  //   return () => {
-  //     document.body.style.overflow = "auto";
-  //   };
-  // }, []);
-
   return (
     <>
       <div className={styles.medicalBg}>
         <div className={styles.formContainer}>
-          {/* Barra de progresso */}
           <div
             style={{
               height: "8px",
@@ -152,13 +158,22 @@ export default function Page() {
 
                 <div className={styles.formField}>
                   <label>Senha</label>
-                  <input
-                    type="password"
-                    name="senha"
-                    value={formData.senha}
-                    onChange={handleChange}
-                    required
-                  />
+                  <div className={styles.passwordWrapper}>
+                    <input
+                      type={mostrarSenha ? "text" : "password"}
+                      name="senha"
+                      value={formData.senha}
+                      onChange={handleChange}
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setMostrarSenha(!mostrarSenha)}
+                      className={styles.eyeButton}
+                    >
+                      {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                  </div>
                   {errors.senha && (
                     <span style={{ color: "red" }}>{errors.senha}</span>
                   )}
@@ -166,13 +181,24 @@ export default function Page() {
 
                 <div className={styles.formField}>
                   <label>Confirmar Senha</label>
-                  <input
-                    type="password"
-                    name="confirmarSenha"
-                    value={formData.confirmarSenha}
-                    onChange={handleChange}
-                    required
-                  />
+                  <div className={styles.passwordWrapper}>
+                    <input
+                      type={mostrarConfirmarSenha ? "text" : "password"}
+                      name="confirmarSenha"
+                      value={formData.confirmarSenha}
+                      onChange={handleChange}
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setMostrarConfirmarSenha(!mostrarConfirmarSenha)
+                      }
+                      className={styles.eyeButton}
+                    >
+                      {mostrarConfirmarSenha ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                  </div>
                   {errors.confirmarSenha && (
                     <span style={{ color: "red" }}>
                       {errors.confirmarSenha}
@@ -303,6 +329,14 @@ export default function Page() {
           </div>
         </div>
       </div>
+
+      <ModalMessage
+        show={modalInfo.show}
+        success={modalInfo.success}
+        message={modalInfo.message}
+        onClose={() => setModalInfo({ ...modalInfo, show: false })}
+      />
+
       <Footer />
     </>
   );

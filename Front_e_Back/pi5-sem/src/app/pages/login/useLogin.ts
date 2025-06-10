@@ -10,7 +10,12 @@ export const useLogin = () => {
   const { setUsuario } = useAuth();
   const [formData, setFormData] = useState({ email: '', senha: '' });
   const [loading, setLoading] = useState(false);
-  const [erro, setErro] = useState('');
+
+  const [modalInfo, setModalInfo] = useState({
+    show: false,
+    success: false,
+    message: '',
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -20,7 +25,6 @@ export const useLogin = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setErro('');
 
     try {
       const resultado = await authService.login(formData.email, formData.senha);
@@ -29,15 +33,26 @@ export const useLogin = () => {
 
       setUsuario(resultado.user); // atualiza o contexto
 
-      alert('Login realizado com sucesso!');
-      router.push('/');
+      setModalInfo({
+        show: true,
+        success: true,
+        message: 'Login realizado com sucesso!',
+      });
+
+      setTimeout(() => {
+        router.push('/');
+      }, 1500);
     } catch (error) {
-      setErro('Email ou senha incorretos. Tente novamente.');
+      setModalInfo({
+        show: true,
+        success: false,
+        message: 'Email ou senha incorretos. Tente novamente.',
+      });
       console.error('Erro no login:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  return { formData, handleChange, handleSubmit, erro, loading };
+  return { formData, handleChange, handleSubmit, loading, modalInfo, setModalInfo };
 };
