@@ -10,22 +10,22 @@ export default function Sobre() {
     {
       nome: "Olavo Moretto",
       imagem: "/images/creator1.jpg",
-      portfolio: "/"
+      GitHub: "https://github.com/Moretto04"
     },
     {
       nome: "Fernando Rodrigues",
       imagem: "/images/creator2.jpg",
-      portfolio: "/"
+      GitHub: "https://github.com/FernandoRodrigues1002"
     },
     {
       nome: "Eric Cordeiro ",
       imagem: "/images/creator3.jpg",
-      portfolio: "/"
+      GitHub: "https://github.com/Cordeirx"
     },
     {
       nome: "João Pedro",
       imagem: "/images/creator4.jpg",
-      portfolio: "/"
+      GitHub: "https://github.com/jpalmeida-dev"
     }
   ];
 
@@ -82,7 +82,7 @@ export default function Sobre() {
             />
             <div className={styles.overlayInfo}>
               <p>{criador.nome}</p>
-              <a href={criador.portfolio} target="_blank">Portfólio</a>
+              <a href={criador.GitHub} target="_blank">GitHub</a>
             </div>
           </div>
         ))}
