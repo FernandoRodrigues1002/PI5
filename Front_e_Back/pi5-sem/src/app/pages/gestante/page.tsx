@@ -1,4 +1,8 @@
+"use client";
+
 import React from 'react';
+import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 import styles from './gestante.module.css';
 
 type Vacina = {
@@ -38,9 +42,14 @@ const calendarioGestante: Vacina[] = [
   },
 ];
 
-const Gestante: React.FC = () => {
+const Page: React.FC = () => {
+  const router = useRouter();
   return (
     <div className={styles.container}>
+      <button className={styles.backButton} onClick={() => router.back()}>
+        <ArrowLeft size={28} />
+      </button>
+
       <h1 className={styles.title}>Calendário de Vacinação para Gestantes 2025</h1>
       <p className={styles.intro}>
         Tomar as vacinas recomendadas durante a gravidez ajuda a proteger você e seu bebê de doenças potencialmente graves.
@@ -70,4 +79,4 @@ const Gestante: React.FC = () => {
   );
 };
 
-export default Gestante;
+export default Page;

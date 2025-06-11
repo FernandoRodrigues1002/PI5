@@ -1,14 +1,15 @@
+/* Container centralizado ao meio da tela */
 .container {
-  max-width: 900px;
-  margin: 90px auto 50px auto; /* 90px de topo, 50px de baixo */
-  padding: 20px 24px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9fafb;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  color: #222;
+  min-height: calc(100vh - 60px); /* Reservando espaço pro footer */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
+/* Título */
 .title {
   font-size: 2.8rem;
   font-weight: 700;
@@ -18,20 +19,24 @@
   letter-spacing: 1px;
 }
 
+/* Lista em linha */
 .lista {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 28px;
+  display: flex;
+  gap: 20px;
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
 
+/* Estilização dos cards */
 .item {
   border-radius: 14px;
-  background-color: white;
+  background-color: #0070f3;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-width: 160px;
 }
 
 .item:hover {
@@ -39,69 +44,32 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
+/* Link interno */
 .link {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 120px;
+  height: 150px;
   font-size: 1.4rem;
   font-weight: 600;
-  color: #2d3748;
+  color: white;
   text-decoration: none;
   border-radius: 14px;
-  padding: 0 20px;
+  padding: 20px;
   user-select: none;
   cursor: pointer;
+  text-align: center;
 }
 
 .link:hover,
 .link:focus {
-  color: #3182ce;
-  outline: none;
+  opacity: 0.9;
 }
 
-@media (max-width: 768px) {
-  .title {
-    font-size: 2rem;
-    margin-bottom: 30px;
-  }
-
-  .lista {
-    gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-
-  .link {
-    height: 100px;
-    font-size: 1.2rem;
-    padding: 0 16px;
-  }
-
-  .container {
-    margin: 80px 15px 40px 15px;
-    padding: 16px;
-  }
+/* Ícone */
+.icon {
+  margin-bottom: 10px;
+  color: white;
 }
 
-@media (max-width: 480px) {
-  .title {
-    font-size: 1.6rem;
-    margin-bottom: 20px;
-  }
-
-  .lista {
-    gap: 16px;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  }
-
-  .link {
-    height: 90px;
-    font-size: 1rem;
-    padding: 0 12px;
-  }
-
-  .container {
-    margin: 70px 10px 30px 10px;
-    padding: 14px;
-  }
-}

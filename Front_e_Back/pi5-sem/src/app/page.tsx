@@ -332,11 +332,12 @@ export default function Home() {
           <section className={styles.calendarSection}>
             <div className={styles.sectionTitle}>
               <h2>Calendário de Vacinação</h2>
-              <p className={styles.sectionDescription}>
-                Confira as vacinas recomendadas por faixa etária e grupos
-                prioritários.
-              </p>
             </div>
+
+            <p className={styles.sectionDescription}>
+              Confira as vacinas recomendadas por faixa etária e grupos
+              prioritários.
+            </p>
 
             <div className={styles.calendarGrid}>
               <Card
@@ -384,11 +385,12 @@ export default function Home() {
           <section className={styles.benefitsSection}>
             <div className={styles.sectionTitle}>
               <h2>Por que se vacinar?</h2>
+            </div>
+            
               <p className={styles.sectionDescription}>
                 A vacinação é uma das medidas mais eficazes para prevenir
                 doenças e salvar vidas
               </p>
-            </div>
 
             <div className={styles.benefitsCards}>
               <div className={styles.benefitItem}>

@@ -1,5 +1,10 @@
+"use client";
+
 import React from 'react';
+import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 import styles from './crianca.module.css';
+
 
 type Vacina = {
   nome: string;
@@ -65,8 +70,14 @@ const calendario: FaixaEtaria[] = [
 ];
 
 const Page: React.FC = () => {
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
+      <button className={styles.backButton} onClick={() => router.back()}>
+        <ArrowLeft size={28} />
+      </button>
+
       <h1 className={styles.title}>Calendário de Vacinação Infantil 2025</h1>
       <table className={styles.table}>
         <thead>
@@ -94,7 +105,7 @@ const Page: React.FC = () => {
         </tbody>
       </table>
       <p className={styles.note}>
-        Além disso, a vacinação contra Influenza é anual para crianças de 6 meses a menos de 6 anos, com esquema especial para as primeiras doses.  
+        Além disso, a vacinação contra Influenza é anual para crianças de 6 meses a menos de 6 anos, com esquema especial para as primeiras doses.
         A vacinação é gratuita e oferecida nas unidades básicas de saúde (UBS) e maternidades em todo o país.
       </p>
     </div>

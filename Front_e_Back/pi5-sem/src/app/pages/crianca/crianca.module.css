@@ -57,3 +57,22 @@
   font-style: italic;
   text-align: center;
 }
+
+.backButton {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+  z-index: 10;
+}
+
+.backButton:hover {
+  transform: scale(1.1);
+}

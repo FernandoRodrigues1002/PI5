@@ -1,4 +1,8 @@
+"use client";
+
 import React from 'react';
+import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 import styles from './jovens.module.css';
 
 type Vacina = {
@@ -44,8 +48,14 @@ const calendarioJovens: Vacina[] = [
 ];
 
 const Page: React.FC = () => {
+  const router = useRouter();
   return (
     <div className={styles.container}>
+      
+      <button className={styles.backButton} onClick={() => router.back()}>
+        <ArrowLeft size={28} />
+      </button>
+
       <h1 className={styles.title}>Calendário de Vacinação para Jovens e Adolescentes (10 a 24 anos) - 2025</h1>
       <table className={styles.table}>
         <thead>
