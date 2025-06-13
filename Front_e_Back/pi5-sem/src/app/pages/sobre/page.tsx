@@ -24,7 +24,7 @@ export default function Sobre() {
     },
     {
       nome: "João Pedro",
-      imagem: "/images/creator4.jpg",
+      imagem: "/images/Creator4.jpg",
       GitHub: "https://github.com/jpalmeida-dev"
     }
   ];
