@@ -64,7 +64,7 @@ export default function Sobre() {
         </div>
       </div>
 
-      <div className={styles.history}>
+      <div className={styles.history} style={{ background: "transparent" }}>
         <h2>Nossa História</h2>
         <p>Em muitas comunidades brasileiras, principalmente nas regiões mais carentes, encontrar um posto de saúde com os medicamentos necessários pode ser uma verdadeira jornada. Faltam informações acessíveis, atualizadas e organizadas. Muitas vezes, o cidadão percorre longas distâncias apenas para descobrir que o remédio que precisa não está disponível.</p>
         <p>Diante dessa realidade, nasceu o projeto MedLocator — uma plataforma digital desenvolvida com o objetivo de aproximar a população dos serviços de saúde pública, permitindo que qualquer pessoa possa localizar postos de saúde próximos e verificar, em tempo real, quais medicamentos estão disponíveis em cada unidade.</p>
