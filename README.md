@@ -25,12 +25,12 @@ Acesse o aplicativo online:
 
 ### Backend
 
-#### 1. Instale as dependências
+#### Instale as dependências
 
 ```bash
 npm install
 
-npm run 
+npm run dev
 
 - Acesse http://localhost:3000 para visualizar o app localmente.
 
