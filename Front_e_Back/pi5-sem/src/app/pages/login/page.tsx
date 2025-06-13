@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import styles from './Login.module.css';
+import styles from './login.module.css';
 import { useLogin } from './useLogin';
 import { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';

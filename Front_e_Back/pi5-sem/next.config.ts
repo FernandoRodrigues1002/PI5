@@ -5,15 +5,14 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/geocode_cep',
-        destination: 'http://localhost:8000/geocode_cep',
+        destination: 'https://api-localizar.onrender.com/geocode_cep',
       },
       {
         source: '/postos_proximos',
-        destination: 'http://localhost:8000/postos_proximos',
-      },
+        destination: 'https://api-localizar.onrender.com/postos_proximos',
+      }
     ]
   },
 };
-
 
 export default nextConfig;
