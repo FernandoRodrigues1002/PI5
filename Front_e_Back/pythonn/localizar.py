@@ -97,9 +97,6 @@ def buscar_postos_osm(lat, lon, raio_m=2000):
 
     return postos
 
-
-
-
 # @app.get("/", response_class=HTMLResponse)
 # async def home(request: Request):
 #     return templates.TemplateResponse("index.html", {"request": request})
