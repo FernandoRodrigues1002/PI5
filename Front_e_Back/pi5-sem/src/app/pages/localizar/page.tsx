@@ -86,7 +86,7 @@ export default function Localizar() {
         setLoading(true);
         try {
           const response = await fetch(
-            `/postos_proximos?lat=${lat}&lon=${lon}`,
+            `https://api-localizar.onrender.com/postos_proximos?lat=${lat}&lon=${lon}`,
             {
               headers: email ? { "x-user-email": email } : {},
             }
@@ -163,7 +163,7 @@ export default function Localizar() {
       if (cep) {
         // Busca lat/lon pelo backend usando o CEP
         setLoading(true);
-        fetch(`/geocode_cep?cep=${cep}`)
+        fetch(`https://api-localizar.onrender.com/geocode_cep?cep=${cep}`)
           .then(res => res.json())
           .then(data => {
             if (data.lat && data.lon) {
