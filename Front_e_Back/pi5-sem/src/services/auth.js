@@ -1,4 +1,4 @@
-const API_URL = 'https://api-login-wpoo.onrender.com'; // URL do servidor Flask
+const API_URL = 'https://api-login-wpoo.onrender.com'; 
 
 const handleResponse = async (response) => {
   const data = await response.json();
