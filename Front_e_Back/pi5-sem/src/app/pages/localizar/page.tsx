@@ -5,6 +5,23 @@ import { authService } from "@/services/auth";
 import styles from "./localizar.module.css";
 import Footer from '@/app/components/footer/Footer';
 
+type Medicamento = {
+  nome: string;
+  quantidade: number;
+};
+
+type Posto = {
+  lat: number;
+  lon: number;
+  nome: string;
+  medicamentos: Medicamento[];
+};
+
+interface CustomWindow extends Window {
+  mostrarOverlay: (nome: string, medicamentos: Medicamento[]) => void;
+  fecharOverlay: () => void;
+}
+declare let window: CustomWindow;
 
 export default function Localizar() {
   const [loading, setLoading] = useState(false);
@@ -26,15 +43,15 @@ export default function Localizar() {
       if (!mapRef.current) return;
 
       // Remove mapa anterior se já existir
-      if ((mapRef.current as any)._leaflet_map) {
-        const existingMap = (mapRef.current as any)._leaflet_map;
-        existingMap.remove();
-        delete (mapRef.current as any)._leaflet_map;
+      if ((mapRef.current as HTMLDivElement & { _leaflet_map?: L.Map })._leaflet_map) {
+        const existingMap = (mapRef.current as HTMLDivElement & { _leaflet_map?: L.Map })._leaflet_map;
+        existingMap?.remove();
+        delete (mapRef.current as HTMLDivElement & { _leaflet_map?: L.Map })._leaflet_map;
         mapRef.current.innerHTML = "";
       }
 
       // Corrige ícones do Leaflet no Next.js
-      delete (L.Icon.Default.prototype as any)._getIconUrl;
+      delete (L.Icon.Default.prototype as { _getIconUrl?: unknown })._getIconUrl;
       L.Icon.Default.mergeOptions({
         iconRetinaUrl:
           "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -71,7 +88,7 @@ export default function Localizar() {
         });
 
         const map = L.map(mapRef.current).setView([lat, lon], 14);
-        (mapRef.current as any)._leaflet_map = map;
+        (mapRef.current as HTMLDivElement & { _leaflet_map?: L.Map })._leaflet_map = map;
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 19,
@@ -91,14 +108,14 @@ export default function Localizar() {
               headers: email ? { "x-user-email": email } : {},
             }
           );
-          const postos = await response.json();
+          const postos: Posto[] = await response.json();
 
           if (!Array.isArray(postos) || postos.length === 0) {
             alert("Nenhum posto encontrado.");
             return;
           }
 
-          postos.forEach((p: any) => {
+          postos.forEach((p: Posto) => {
             if (p.lat && p.lon) {
               const marker = L.marker([p.lat, p.lon], { icon: blueIcon }).addTo(map);
               marker.bindPopup(
@@ -111,10 +128,10 @@ export default function Localizar() {
                 setTimeout(() => {
                   const btn = document.getElementById(
                     `detalhes-${p.lat}-${p.lon}`
-                  );
+                  ) as HTMLButtonElement | null;
                   if (btn) {
                     btn.onclick = () =>
-                      (window as any).mostrarOverlay(p.nome, p.medicamentos);
+                      window.mostrarOverlay(p.nome, p.medicamentos);
                   }
                 }, 0);
               });
@@ -129,7 +146,7 @@ export default function Localizar() {
       };
 
       // Função overlay
-      (window as any).mostrarOverlay = (nome: string, medicamentos: any[]) => {
+      window.mostrarOverlay = (nome: string, medicamentos: Medicamento[]) => {
         let content = `<h3>${nome}</h3>`;
         if (medicamentos && medicamentos.length > 0) {
           content += "<ul>";
@@ -149,7 +166,7 @@ export default function Localizar() {
           overlay.style.transform = "translateY(0)";
         }
       };
-      (window as any).fecharOverlay = () => {
+      window.fecharOverlay = () => {
         const overlay = document.getElementById("overlay");
         if (overlay) {
           overlay.style.opacity = "0";
@@ -209,10 +226,9 @@ export default function Localizar() {
       </div>
       <div id="overlay" className={styles.overlay}>
         <span id="overlay-content"></span>
-        <button onClick={() => (window as any).fecharOverlay()}>Fechar</button>
+        <button onClick={() => window.fecharOverlay()}>Fechar</button>
       </div>
       <Footer />
     </>
   );
-
 }
