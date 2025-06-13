@@ -30,7 +30,6 @@ Acesse o aplicativo online:
 ```bash
 npm install
 
-```bash
 npm run 
 
 - Acesse http://localhost:3000 para visualizar o app localmente.
