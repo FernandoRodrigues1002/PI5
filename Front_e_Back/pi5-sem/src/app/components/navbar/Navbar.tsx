@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./navbar.module.css";
 import { usePathname } from "next/navigation";
 import { useAuth } from "../hooks/useAuth";
-import { FiLogOut, FiBell, FiUser, FiEye, FiEyeOff, FiMenu } from "react-icons/fi";
+import { FiLogOut, FiBell, FiUser, FiEye, FiEyeOff, FiMenu, FiAlertTriangle } from "react-icons/fi";
 import { useState, useEffect, useRef } from "react";
 
 interface Notificacao {
@@ -24,6 +24,7 @@ export default function Navbar() {
   const [dropdownNotifsOpen, setDropdownNotifsOpen] = useState(false);
   const [dropdownUserOpen, setDropdownUserOpen] = useState(false);
   const [showCpf, setShowCpf] = useState(false);
+  const [showConfirmLogout, setShowConfirmLogout] = useState(false);
 
   const userDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -42,7 +43,6 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    // Fecha dropdowns ao login/logout
     setDropdownUserOpen(false);
     setDropdownNotifsOpen(false);
   }, [usuario]);
@@ -54,6 +54,15 @@ export default function Navbar() {
     : "";
 
   const toggleShowCpf = () => setShowCpf(prev => !prev);
+
+  const handleLogout = () => {
+    setShowConfirmLogout(true);
+  };
+
+  const confirmLogout = () => {
+    setShowConfirmLogout(false);
+    logout();
+  };
 
   return (
     <>
@@ -81,7 +90,6 @@ export default function Navbar() {
         <div className={styles.authLinks}>
           {usuario ? (
             <>
-              {/* Notificações */}
               {usuario.premium && (
                 <div className={styles.notificacaoDropdown}>
                   <div
@@ -123,7 +131,6 @@ export default function Navbar() {
                 </div>
               )}
 
-              {/* Usuário */}
               <div className={styles.userDropdown} ref={userDropdownRef}>
                 <div
                   className={styles.userIcon}
@@ -140,12 +147,10 @@ export default function Navbar() {
                       <h4>{usuario.nome}</h4>
                       <p>
                         Assinatura:{" "}
-                        <span
-                          style={{
-                            color: usuario.premium ? "gold" : "#2563eb",
-                            fontWeight: "bold"
-                          }}
-                        >
+                        <span style={{
+                          color: usuario.premium ? "gold" : "#2563eb",
+                          fontWeight: "bold"
+                        }}>
                           {usuario.premium ? "Premium" : "Padrão"}
                         </span>
                       </p>
@@ -169,10 +174,7 @@ export default function Navbar() {
                         </button>
                       </p>
                     </div>
-                    <button
-                      onClick={logout}
-                      className={styles.logoutButton}
-                    >
+                    <button onClick={handleLogout} className={styles.logoutButton}>
                       <FiLogOut /> Sair
                     </button>
                   </div>
@@ -239,7 +241,7 @@ export default function Navbar() {
                   </button>
                 </p>
               </div>
-              <button className={styles.logoutButton} onClick={logout}>
+              <button onClick={handleLogout} className={styles.logoutButton}>
                 <FiLogOut /> Sair
               </button>
             </div>
@@ -248,6 +250,26 @@ export default function Navbar() {
               <Link href="/pages/login" className={pathname === "/pages/login" ? "active" : ""} onClick={() => setIsMobileMenuOpen(false)}>Entrar</Link>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Modal de confirmação */}
+      {showConfirmLogout && (
+        <div className={styles.modalOverlay} onClick={() => setShowConfirmLogout(false)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.messageContainer}>
+              <FiAlertTriangle className={styles.alertIcon} />
+              <p className={styles.messageText}>Deseja realmente sair?</p>
+            </div>
+            <div className={styles.confirmButtons}>
+              <button onClick={() => setShowConfirmLogout(false)} className={`${styles.confirmButton} ${styles.cancelButton}`}>
+                Cancelar
+              </button>
+              <button onClick={confirmLogout} className={`${styles.confirmButton} ${styles.confirmButtonPrimary}`}>
+                <span>Confirmar</span>
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

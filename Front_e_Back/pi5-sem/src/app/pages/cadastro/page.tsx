@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./cadastro.module.css";
 import { useRouter } from "next/navigation";
 import { cadastrarUsuario } from "./useCadstro";
@@ -8,6 +8,7 @@ import Link from "next/link";
 import Footer from "../../components/footer/Footer";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import ModalMessage from "../../components/modal/ModalMessage";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function Page() {
   const router = useRouter();
@@ -31,6 +32,27 @@ export default function Page() {
     success: false,
     message: "",
   });
+  const [isProcessing, setIsProcessing] = useState(false); // NOVO: estado para loading
+
+  // requisitos de senha
+  const [passwordRequisitos, setPasswordRequisitos] = useState({
+    minLength: false,
+    hasUppercase: false,
+    hasLowercase: false,
+    hasNumber: false,
+    hasSpecialChar: false,
+  });
+
+  useEffect(() => {
+    const senha = formData.senha;
+    setPasswordRequisitos({
+      minLength: senha.length >= 8,
+      hasUppercase: /[A-Z]/.test(senha),
+      hasLowercase: /[a-z]/.test(senha),
+      hasNumber: /[0-9]/.test(senha),
+      hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(senha),
+    });
+  }, [formData.senha]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -45,8 +67,8 @@ export default function Page() {
         newErrors.email = "Email inválido.";
 
       if (!formData.senha) newErrors.senha = "Senha é obrigatória.";
-      else if (formData.senha.length < 6)
-        newErrors.senha = "Senha deve ter ao menos 6 caracteres.";
+      else if (Object.values(passwordRequisitos).includes(false))
+        newErrors.senha = "Senha não atende aos requisitos.";
 
       if (formData.senha !== formData.confirmarSenha)
         newErrors.confirmarSenha = "Senhas não coincidem.";
@@ -81,6 +103,7 @@ export default function Page() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateStep()) {
+      setIsProcessing(true); // mostra o loading
       try {
         await cadastrarUsuario({
           nome: formData.nome,
@@ -105,6 +128,8 @@ export default function Page() {
               ? "Erro ao cadastrar: " + error.message
               : "Erro ao cadastrar.",
         });
+      } finally {
+        setIsProcessing(false); // esconde o loading
       }
     }
   };
@@ -115,22 +140,10 @@ export default function Page() {
     <>
       <div className={styles.medicalBg}>
         <div className={styles.formContainer}>
-          <div
-            style={{
-              height: "8px",
-              background: "#ccc",
-              borderRadius: "4px",
-              marginBottom: "1rem",
-              overflow: "hidden",
-            }}
-          >
+          <div className={styles.progressBar}>
             <div
-              style={{
-                width: `${progressPercent}%`,
-                height: "100%",
-                background: "#0070f3",
-                transition: "width 0.3s ease",
-              }}
+              className={styles.progress}
+              style={{ width: `${progressPercent}%` }}
             ></div>
           </div>
 
@@ -152,7 +165,7 @@ export default function Page() {
                     required
                   />
                   {errors.email && (
-                    <span style={{ color: "red" }}>{errors.email}</span>
+                    <span className={styles.error}>{errors.email}</span>
                   )}
                 </div>
 
@@ -175,8 +188,59 @@ export default function Page() {
                     </button>
                   </div>
                   {errors.senha && (
-                    <span style={{ color: "red" }}>{errors.senha}</span>
+                    <span className={styles.error}>{errors.senha}</span>
                   )}
+
+                  <div className={styles.passwordRequisitos}>
+                    <p>Requisitos da senha:</p>
+                    <ul>
+                      <li
+                        className={
+                          passwordRequisitos.minLength
+                            ? styles.valido
+                            : styles.invalido
+                        }
+                      >
+                        Mínimo 8 caracteres
+                      </li>
+                      <li
+                        className={
+                          passwordRequisitos.hasUppercase
+                            ? styles.valido
+                            : styles.invalido
+                        }
+                      >
+                        Pelo menos uma letra maiúscula
+                      </li>
+                      <li
+                        className={
+                          passwordRequisitos.hasLowercase
+                            ? styles.valido
+                            : styles.invalido
+                        }
+                      >
+                        Pelo menos uma letra minúscula
+                      </li>
+                      <li
+                        className={
+                          passwordRequisitos.hasNumber
+                            ? styles.valido
+                            : styles.invalido
+                        }
+                      >
+                        Pelo menos um número
+                      </li>
+                      <li
+                        className={
+                          passwordRequisitos.hasSpecialChar
+                            ? styles.valido
+                            : styles.invalido
+                        }
+                      >
+                        Pelo menos um caractere especial
+                      </li>
+                    </ul>
+                  </div>
                 </div>
 
                 <div className={styles.formField}>
@@ -200,9 +264,7 @@ export default function Page() {
                     </button>
                   </div>
                   {errors.confirmarSenha && (
-                    <span style={{ color: "red" }}>
-                      {errors.confirmarSenha}
-                    </span>
+                    <span className={styles.error}>{errors.confirmarSenha}</span>
                   )}
                 </div>
 
@@ -228,7 +290,7 @@ export default function Page() {
                     required
                   />
                   {errors.nome && (
-                    <span style={{ color: "red" }}>{errors.nome}</span>
+                    <span className={styles.error}>{errors.nome}</span>
                   )}
                 </div>
 
@@ -243,11 +305,11 @@ export default function Page() {
                     required
                   />
                   {errors.cpf && (
-                    <span style={{ color: "red" }}>{errors.cpf}</span>
+                    <span className={styles.error}>{errors.cpf}</span>
                   )}
                 </div>
 
-                <div style={{ display: "flex", gap: "0.5rem" }}>
+                <div className={styles.buttonGroup}>
                   <button
                     type="button"
                     onClick={prevStep}
@@ -278,7 +340,7 @@ export default function Page() {
                     required
                   />
                   {errors.endereco && (
-                    <span style={{ color: "red" }}>{errors.endereco}</span>
+                    <span className={styles.error}>{errors.endereco}</span>
                   )}
                 </div>
 
@@ -292,11 +354,11 @@ export default function Page() {
                     required
                   />
                   {errors.cep_usuario && (
-                    <span style={{ color: "red" }}>{errors.cep_usuario}</span>
+                    <span className={styles.error}>{errors.cep_usuario}</span>
                   )}
                 </div>
 
-                <div style={{ display: "flex", gap: "0.5rem" }}>
+                <div className={styles.buttonGroup}>
                   <button
                     type="button"
                     onClick={prevStep}
@@ -312,23 +374,19 @@ export default function Page() {
             )}
           </form>
 
-          <div
-            style={{
-              marginTop: "1rem",
-              textAlign: "center",
-              fontSize: "0.9rem",
-            }}
-          >
-            Já tem cadastro?{" "}
-            <Link
-              href="/pages/login"
-              style={{ color: "#0070f3", textDecoration: "underline" }}
-            >
-              Faça login aqui!
-            </Link>
+          <div className={styles.linkArea}>
+            Já tem cadastro? <Link className={styles.link} href="/pages/login">Faça login aqui</Link>
           </div>
         </div>
       </div>
+
+      {/* Overlay de processamento */}
+      {isProcessing && (
+        <div className={styles.processingOverlay}>
+          <AiOutlineLoading3Quarters className={styles.spinner} />
+          <p>Processando cadastro...</p>
+        </div>
+      )}
 
       <ModalMessage
         show={modalInfo.show}
@@ -336,7 +394,6 @@ export default function Page() {
         message={modalInfo.message}
         onClose={() => setModalInfo({ ...modalInfo, show: false })}
       />
-
       <Footer />
     </>
   );

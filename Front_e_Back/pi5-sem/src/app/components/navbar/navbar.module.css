@@ -239,6 +239,113 @@
   gap: 0.5rem;
 }
 
+/* Estilo do modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modalContent {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.messageContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  justify-content: start;
+}
+
+.alertIcon {
+  color: #FFA500;
+  font-size: 2rem;
+}
+
+.messageText {
+  color: #000; 
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.confirmButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.confirmButton {
+  padding: 0.4rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cancelButton {
+  background-color: #1f2937;
+  color: #fff;
+}
+
+.cancelButton:hover {
+  background-color: #283e5f;
+  color: #fff;
+}
+
+.confirmButtonPrimary {
+  background-color: #0070f3;
+  color: #fff;
+}
+
+.confirmButtonPrimary:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.confirmButtonPrimary::after {
+  content: "Sair";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.confirmButtonPrimary:hover::after {
+  opacity: 1;
+}
+
+.confirmButtonPrimary span {
+  transition: opacity 0.3s ease;
+}
+
+.confirmButtonPrimary:hover span {
+  opacity: 0;
+}
+
+
 /* Ajuste de centralização apenas no desktop */
 @media (min-width: 901px) {
   .logoArea, .navLinks, .authLinks {
