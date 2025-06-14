@@ -3,26 +3,26 @@
   margin: 40px auto;
   padding: 24px;
   font-family: Arial, sans-serif;
-  background-color: #fdfdfd; /* cor do modelo */
+  background-color: #fdfdfd; 
   border-radius: 10px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.1);
   color: #222;
-  box-sizing: border-box; /* para melhor controle de padding e largura */
+  box-sizing: border-box; 
 }
 
 .title {
   text-align: center;
-  color: #2c3e50; /* cor do modelo */
+  color: #2c3e50; 
   margin-bottom: 24px;
-  font-size: 2.2rem; /* tamanho do modelo */
+  font-size: 2.2rem; 
   font-weight: 700;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 24px; /* igual modelo */
-  word-break: break-word; /* igual modelo */
+  margin-bottom: 24px; 
+  word-break: break-word; 
 }
 
 .table th,
@@ -31,23 +31,23 @@
   padding: 12px 16px;
   vertical-align: middle;
   text-align: left;
-  font-size: 1rem; /* igual modelo */
+  font-size: 1rem; 
 }
 
 .table th {
-  background-color: #2980b9; /* cor do modelo */
+  background-color: #2980b9; 
   color: white;
   font-weight: 600;
 }
 
 .vacinaNome {
   font-weight: 600;
-  color: #1b355a; /* cor do modelo */
+  color: #1b355a; 
 }
 
 .note {
-  font-size: 1rem; /* do modelo */
-  color: #666; /* do modelo */
+  font-size: 1rem; 
+  color: #666; 
   font-style: italic;
   text-align: center;
 }

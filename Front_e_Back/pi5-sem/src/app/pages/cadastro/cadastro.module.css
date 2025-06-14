@@ -139,7 +139,7 @@
   color: #0070f3;
 }
 
-/* Tablets médios e iPads (paisagem e retrato) */
+/* Tablets médios e iPads */
 @media (max-width: 1024px) {
   .formContainer {
     max-width: 90%;
@@ -148,7 +148,7 @@
   }
 }
 
-/* Tablets pequenos e iPhones Plus / grandes */
+/* Tablets pequenos e iPhones Plus */
 @media (max-width: 768px) {
   .formContainer {
     max-width: 90%;
@@ -158,7 +158,7 @@
   }
 }
 
-/* Smartphones médios (ex: iPhone 6/7/8, X, 11, 12, 13, 14) */
+/* Smartphones médios (iPhone 6/7/8, X, 11, 12, 13, 14) */
 @media (max-width: 480px) {
   .formContainer {
     max-width: 100%;
@@ -168,7 +168,7 @@
   }
 }
 
-/* Smartphones pequenos (ex: iPhone SE e similares) */
+/* Smartphones pequenos (iPhone SE e similares) */
 @media (max-width: 360px) {
   .formContainer {
     padding-top: 2rem;

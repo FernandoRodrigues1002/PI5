@@ -105,7 +105,7 @@
     font-size: 1.8rem;
   }
   .item {
-    width: calc(50% - 15px); /* <-- 50% menos metade do gap para caber certinho */
+    width: calc(50% - 15px);
     min-width: unset;
     max-width: unset;
   }
@@ -122,7 +122,7 @@
 /* iPhone SE ainda menor */
 @media (max-width: 375px) {
   .item {
-    width: calc(50% - 12px); /* Ajuste fino para gaps menores */
+    width: calc(50% - 12px); 
   }
   .link {
     font-size: 0.95rem;

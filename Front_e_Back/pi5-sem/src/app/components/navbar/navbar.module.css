@@ -48,7 +48,7 @@
   margin-right: 4rem;
   font-weight: 600;
   color: #000;
-  min-width: 150px; /* protege o alinhamento */
+  min-width: 150px; 
 }
 
 .navLinks :global(a),
@@ -246,7 +246,7 @@
   }
 }
 
-/* Mobile - remove flex grow pra evitar desalinhamento */
+/* Mobile */
 @media (max-width: 900px) {
   .logoArea, .navLinks, .authLinks {
     flex: unset;

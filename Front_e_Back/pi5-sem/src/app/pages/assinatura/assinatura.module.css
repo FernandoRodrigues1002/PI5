@@ -19,8 +19,8 @@
 }
 
 .title {
-  font-size: 3rem; /* Aumentado */
-  font-weight: 800; /* Mais negrito */
+  font-size: 3rem; 
+  font-weight: 800; 
   margin-bottom: 1rem;
   text-align: center;
 }
@@ -96,7 +96,7 @@
   font-size: 1.5rem;
 }
 
-/* ✅ Responsividade */
+/* Responsividade */
 @media (max-width: 1024px) {
   .cards {
     grid-template-columns: repeat(2, 1fr);

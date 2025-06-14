@@ -15,13 +15,14 @@
   color: #2c3e50;
   margin-bottom: 24px;
   font-size: 2rem;
+  font-weight: 700;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
-  word-break: break-word; /* evita estouro em textos longos */
+  word-break: break-word; 
 }
 
 .table th,
