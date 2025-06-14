@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./navbar.module.css";
 import { usePathname } from "next/navigation";
 import { useAuth } from "../hooks/useAuth";
-import { FiLogOut, FiBell, FiUser, FiEye, FiEyeOff } from "react-icons/fi";
+import { FiLogOut, FiBell, FiUser, FiEye, FiEyeOff, FiMenu } from "react-icons/fi";
 import { useState, useEffect, useRef } from "react";
 
 interface Notificacao {
@@ -194,26 +194,50 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Menu mobile */}
+      {/* Menu Mobile */}
       {isMobileMenuOpen && (
         <div className={styles.mobileMenu}>
           <div className={styles.mobileNavLinks}>
-            <Link href="/" className={pathname === "/" ? "active" : ""}>Início</Link>
-            <Link href="/pages/localizar" className={pathname === "/pages/localizar" ? "active" : ""}>Localizar</Link>
-            <Link href="/pages/calendario" className={pathname === "/pages/calendario" ? "active" : ""}>Calendário</Link>
+            <Link href="/" className={pathname === "/" ? "active" : ""} onClick={() => setIsMobileMenuOpen(false)}>Início</Link>
+            <Link href="/pages/localizar" className={pathname === "/pages/localizar" ? "active" : ""} onClick={() => setIsMobileMenuOpen(false)}>Localizar</Link>
+            <Link href="/pages/calendario" className={pathname === "/pages/calendario" ? "active" : ""} onClick={() => setIsMobileMenuOpen(false)}>Calendário</Link>
             {usuario?.premium ? (
-              <Link href="/pages/controles" className={pathname === "/pages/controles" ? "active" : ""}>Controles Premium</Link>
+              <Link href="/pages/controles" className={pathname === "/pages/controles" ? "active" : ""} onClick={() => setIsMobileMenuOpen(false)}>Controles Premium</Link>
             ) : (
-              <Link href="/pages/assinatura" className={pathname === "/pages/assinatura" ? "active" : ""}>Assinatura</Link>
+              <Link href="/pages/assinatura" className={pathname === "/pages/assinatura" ? "active" : ""} onClick={() => setIsMobileMenuOpen(false)}>Assinatura</Link>
             )}
-            <Link href="/pages/sobre" className={pathname === "/pages/sobre" ? "active" : ""}>Sobre</Link>
+            <Link href="/pages/sobre" className={pathname === "/pages/sobre" ? "active" : ""} onClick={() => setIsMobileMenuOpen(false)}>Sobre</Link>
           </div>
 
           {usuario ? (
             <div className={styles.mobileAuthLinks}>
-              <div className={styles.mobileUserBox}>
-                <p><strong>{usuario.nome}</strong></p>
-                <p>Assinatura: {usuario.premium ? "Premium" : "Padrão"}</p>
+              <div className={styles.userInfo} style={{ color: "black" }}>
+                <h4>{usuario.nome}</h4>
+                <p>
+                  Assinatura:{" "}
+                  <span style={{ color: usuario.premium ? "gold" : "#2563eb", fontWeight: "bold" }}>
+                    {usuario.premium ? "Premium" : "Padrão"}
+                  </span>
+                </p>
+                <p style={{ display: "flex", alignItems: "center" }}>
+                  CPF:{" "}
+                  <span style={{ marginLeft: "4px" }}>
+                    {showCpf ? usuario.cpf : "•••.•••.•••-••"}
+                  </span>
+                  <button
+                    onClick={() => setShowCpf(!showCpf)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      marginLeft: "8px",
+                      cursor: "pointer",
+                      color: "black"
+                    }}
+                    title={showCpf ? "Ocultar CPF" : "Mostrar CPF"}
+                  >
+                    {showCpf ? <FiEyeOff /> : <FiEye />}
+                  </button>
+                </p>
               </div>
               <button className={styles.logoutButton} onClick={logout}>
                 <FiLogOut /> Sair
@@ -226,6 +250,7 @@ export default function Navbar() {
           )}
         </div>
       )}
+
     </>
   );
 }
