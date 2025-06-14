@@ -148,10 +148,8 @@
 .passwordRequisitos {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
   font-size: 0.9rem;
-  background: #fafafa;
+  background: transparent;
 }
 
 .passwordRequisitos ul {
