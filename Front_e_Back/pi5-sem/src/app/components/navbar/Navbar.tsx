@@ -245,7 +245,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div className={styles.mobileAuthLinks}>
-              <Link href="/pages/login">Entrar</Link>
+              <Link href="/pages/login" className={pathname === "/pages/login" ? "active" : ""} onClick={() => setIsMobileMenuOpen(false)}>Entrar</Link>
             </div>
           )}
         </div>
