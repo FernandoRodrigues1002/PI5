@@ -377,28 +377,21 @@ export default function Home() {
         </AnimatedSection>
 
         {/* Seção Benefícios */}
-        <AnimatedSection
-          id="benefit"
-          className={styles.sections}
-          sectionIndex={4}
-        >
+        <AnimatedSection id="benefit" className={styles.sections} sectionIndex={4}>
           <section className={styles.benefitsSection}>
             <div className={styles.sectionTitle}>
               <h2>Por que se vacinar?</h2>
             </div>
-            
-              <p className={styles.sectionDescription}>
-                A vacinação é uma das medidas mais eficazes para prevenir
-                doenças e salvar vidas
-              </p>
+
+            <p className={styles.sectionDescription}>
+              A vacinação é uma das medidas mais eficazes para prevenir doenças e salvar vidas
+            </p>
 
             <div className={styles.benefitsCards}>
               <div className={styles.benefitItem}>
                 <Card3
                   title="Previne doenças graves"
-                  subtitle="As vacinas estimulam o sistema imunológico a produzir
-                  anticorpos, criando uma barreira de proteção contra doenças
-                  potencialmente fatais."
+                  subtitle="As vacinas estimulam o sistema imunológico a produzir anticorpos, criando uma barreira de proteção contra doenças potencialmente fatais."
                   animationData={protectedAnim}
                   animationsLoaded={animationsLoaded}
                 />
@@ -414,8 +407,7 @@ export default function Home() {
               <div className={styles.benefitItem}>
                 <Card3
                   title="Ajuda a controlar surtos"
-                  subtitle="A vacinação em massa é fundamental para prevenir e controlar
-                  surtos de doenças infecciosas em nossa sociedade."
+                  subtitle="A vacinação em massa é fundamental para prevenir e controlar surtos de doenças infecciosas em nossa sociedade."
                   animationData={comunityAnim}
                   animationsLoaded={animationsLoaded}
                 />

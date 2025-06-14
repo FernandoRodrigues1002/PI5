@@ -7,30 +7,14 @@ import Footer from "../../components/footer/Footer";
 
 export default function Sobre() {
   const criadores = [
-    {
-      nome: "Olavo Moretto",
-      imagem: "/images/creator1.jpg",
-      GitHub: "https://github.com/Moretto04"
-    },
-    {
-      nome: "Fernando Rodrigues",
-      imagem: "/images/creator2.jpg",
-      GitHub: "https://github.com/FernandoRodrigues1002"
-    },
-    {
-      nome: "Eric Cordeiro ",
-      imagem: "/images/creator3.jpg",
-      GitHub: "https://github.com/Cordeirx"
-    },
-    {
-      nome: "João Pedro",
-      imagem: "/images/Creator4.jpg",
-      GitHub: "https://github.com/jpalmeida-dev"
-    }
+    { nome: "Olavo Moretto", imagem: "/images/creator1.jpg", GitHub: "https://github.com/Moretto04" },
+    { nome: "Fernando Rodrigues", imagem: "/images/creator2.jpg", GitHub: "https://github.com/FernandoRodrigues1002" },
+    { nome: "Eric Cordeiro", imagem: "/images/creator3.jpg", GitHub: "https://github.com/Cordeirx" },
+    { nome: "João Pedro", imagem: "/images/Creator4.jpg", GitHub: "https://github.com/jpalmeida-dev" }
   ];
 
   return (
-    <>
+    <div className={styles.pageWrapper}>
       <div className={styles.header}>
         <Image
           src="/images/aboutImg.jpg"
@@ -64,7 +48,7 @@ export default function Sobre() {
         </div>
       </div>
 
-      <div className={styles.history} style={{ background: "transparent" }}>
+      <div className={styles.history}>
         <h2>Nossa História</h2>
         <p>Em muitas comunidades brasileiras, principalmente nas regiões mais carentes, encontrar um posto de saúde com os medicamentos necessários pode ser uma verdadeira jornada. Faltam informações acessíveis, atualizadas e organizadas. Muitas vezes, o cidadão percorre longas distâncias apenas para descobrir que o remédio que precisa não está disponível.</p>
         <p>Diante dessa realidade, nasceu o projeto MedLocator — uma plataforma digital desenvolvida com o objetivo de aproximar a população dos serviços de saúde pública, permitindo que qualquer pessoa possa localizar postos de saúde próximos e verificar, em tempo real, quais medicamentos estão disponíveis em cada unidade.</p>
@@ -85,16 +69,18 @@ export default function Sobre() {
             />
             <div className={styles.overlayInfo}>
               <p>{criador.nome}</p>
-              <a href={criador.GitHub} target="_blank">GitHub</a>
+              <a href={criador.GitHub} target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
           </div>
         ))}
       </div>
+
       <div className={styles.history}>
         <h2>Agradecimentos</h2>
         <p>Obrigado!</p>
       </div>
+
       <Footer />
-    </>
+    </div>
   );
 }

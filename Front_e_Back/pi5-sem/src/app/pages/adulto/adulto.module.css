@@ -7,11 +7,12 @@
   border-radius: 10px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.1);
   color: #222;
+  box-sizing: border-box;
 }
 
 .title {
   text-align: center;
-  color: #004080;
+  color: #2c3e50;
   margin-bottom: 24px;
   font-size: 2.2rem;
   font-weight: 700;
@@ -21,6 +22,7 @@
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 24px;
+  word-break: break-word;
 }
 
 .table th,
@@ -29,22 +31,23 @@
   padding: 12px 16px;
   vertical-align: middle;
   text-align: left;
+  font-size: 1rem;
 }
 
 .table th {
-  background-color: #004080;
+  background-color: #2980b9;
   color: white;
   font-weight: 600;
 }
 
 .vacinaNome {
   font-weight: 600;
-  color: #003366;
+  color: #1b355a;
 }
 
 .note {
   font-size: 1rem;
-  color: #555;
+  color: #666;
   font-style: italic;
   text-align: center;
 }
@@ -66,4 +69,72 @@
 
 .backButton:hover {
   transform: scale(1.1);
+}
+
+/* ================== RESPONSIVIDADE ================== */
+
+/* Tablets e iPads */
+@media (max-width: 1024px) {
+  .container {
+    margin: 30px 20px;
+    padding: 20px;
+  }
+}
+
+/* Smartphones grandes */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.9rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+}
+
+/* iPhones padrão */
+@media (max-width: 430px) {
+  .container {
+    margin: 20px 10px;
+    padding: 20px 15px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+    margin-top: 20%;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+
+  .backButton {
+    top: 60px;
+    left: 10px;
+    padding: 8px;
+  }
+}
+
+/* iPhone SE e menores */
+@media (max-width: 375px) {
+  .title {
+    font-size: 1.4rem;
+    margin-top: 25%;
+  }
+
+  .table th,
+  .table td {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+
+  .backButton {
+    top: 70px;
+    left: 8px;
+    padding: 6px;
+  }
 }

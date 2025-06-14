@@ -1,27 +1,27 @@
 .medicalBg {
   background-color: #f0f4f8;
-  min-height: calc(100vh - 60px); /* Reduzindo a altura para dar espaço ao footer */
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   color: black;
   background-image: url("/images/login.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  /* Removido overflow: hidden para permitir que o footer apareça */
-  padding-top: 80px;
-  padding-bottom: 40px; /* Adicionando padding inferior */
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .formContainer {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  width: 100%;
   max-width: 500px;
-  margin-bottom: 2rem; /* Espaçamento para o footer */
+  width: 100%;
+  margin: 0; 
+  box-sizing: border-box;
+  border-radius: 12px;
+  padding: 2rem;
+  background-color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .formHeader {
@@ -138,3 +138,52 @@
   font-size: 1.1rem;
   color: #0070f3;
 }
+
+/* Tablets médios e iPads (paisagem e retrato) */
+@media (max-width: 1024px) {
+  .formContainer {
+    max-width: 90%;
+    padding: 1.8rem;
+    margin-bottom: 1.8rem;
+  }
+}
+
+/* Tablets pequenos e iPhones Plus / grandes */
+@media (max-width: 768px) {
+  .formContainer {
+    max-width: 90%;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 10px;
+  }
+}
+
+/* Smartphones médios (ex: iPhone 6/7/8, X, 11, 12, 13, 14) */
+@media (max-width: 480px) {
+  .formContainer {
+    max-width: 100%;
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+    border-radius: 8px;
+  }
+}
+
+/* Smartphones pequenos (ex: iPhone SE e similares) */
+@media (max-width: 360px) {
+  .formContainer {
+    padding-top: 2rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+  }
+  
+  .formField input {
+    font-size: 0.9rem;
+  }
+
+  .submitButton {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+}
+

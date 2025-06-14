@@ -18,7 +18,11 @@ export default function Card3({ title, subtitle, animationData, animationsLoaded
             <Lottie
               animationData={animationData}
               loop={true}
-              style={{ width: "100%", height: "100%" }}
+              style={{
+                width: '100%',
+                maxWidth: '120px',
+                height: 'auto',
+              }}
             />
           ) : (
             <div className={styles.animationPlaceholder}>
