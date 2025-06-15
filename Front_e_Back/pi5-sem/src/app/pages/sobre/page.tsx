@@ -74,12 +74,7 @@ export default function Sobre() {
           </div>
         ))}
       </div>
-
-      <div className={styles.history}>
-        <h2>Agradecimentos</h2>
-        <p>Obrigado!</p>
-      </div>
-
+    
       <Footer />
     </div>
   );
