@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./navbar.module.css";
 import { usePathname } from "next/navigation";
 import { useAuth } from "../hooks/useAuth";
-import { FiLogOut, FiBell, FiUser, FiEye, FiEyeOff, FiMenu, FiAlertTriangle } from "react-icons/fi";
+import { FiLogOut, FiBell, FiUser, FiEye, FiEyeOff, FiAlertTriangle } from "react-icons/fi";
 import { useState, useEffect, useRef } from "react";
 
 interface Notificacao {
