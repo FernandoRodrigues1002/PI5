@@ -18,7 +18,7 @@
     padding: 16px 24px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    z-index: 400;
+    z-index: 2000;
     font-family: sans-serif;
     color: rgb(0, 0, 0);
     opacity: 0;
